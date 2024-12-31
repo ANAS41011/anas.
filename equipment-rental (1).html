@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تأجير المعدات | منصة المزارعين</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style> 
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #28a745;
+            padding: 20px 0;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .logo {
+            font-size: 30px;
+            font-weight: bold;
+        }
+        .product-card {
+            background-color: #fff;
+            margin: 15px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .product-card h5 {
+            margin-top: 15px;
+            font-size: 20px;
+            color: #333;
+        }
+        .product-card p {
+            font-size: 18px;
+            color: #555;
+        }
+        .btn-buy {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .btn-buy:hover {
+            background-color: #218838;
+        }
+        .footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .product-card .btn-buy i {
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شريط التنقل (Navbar) -->
+    <!DOCTYPE html>
+    <html lang="ar" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>دليل الأسعار | منصة المزارعين</title>
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+        <style>
+            /* تنسيق عام */
+            body {
+                font-family: 'Cairo', sans-serif;
+                background-color: #f4f4f9;
+                margin: 0;
+                padding: 0;
+            }
+    
+            /* الهيدر */
+            .header {
+                background-color: #1d6f3f; /* أخضر داكن */
+                padding: 20px 0;
+                color: white;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                border-bottom: 3px solid #ffc107; /* خط أصفر عند الهيدر */
+            }
+    
+            /* الشعار */
+            .logo {
+                font-size: 36px;
+                font-weight: bold;
+                letter-spacing: 2px;
+            }
+    
+            /* شريط التنقل */
+            .navbar-nav .nav-link {
+                color: white !important;
+                font-weight: bold;
+                padding: 12px 20px;
+            }
+    
+            .navbar-nav .nav-link:hover {
+                color: #ffc107 !important;
+                background-color: rgba(255, 193, 7, 0.2);
+                border-radius: 5px;
+            }
+    
+            /* التنقل المتجاوب */
+            @media (max-width: 767px) {
+                .navbar-nav {
+                    text-align: center;
+                }
+            }
+    
+            /* تحسين التباعد في الأقسام */
+            .container {
+                padding: 20px;
+            }
+        </style>
+    </head>
+    <body>
+    
+        <!-- الهيدر -->
+        <header class="header sticky-top">
+            <div class="container">
+                <!-- الشعار -->
+                <div class="logo">🌾 نبض الزراعة</div>
+                <!-- شريط التنقل -->
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a class="navbar-brand" href="index.html">الرئيسية</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="about-1.html">من نحن</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="services (1).html">الخدمات</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="Contact (1).html">تواصل معنا</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </header>
+    
+        <!-- إضافة جافا سكريبت لتفعيل زر التبديل -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    
+    </body>
+    </html>
+    
+    
+    <!-- محتوى السوق -->
+    <section class="container text-center">
+        <h2>السوق الإلكتروني</h2> تأجير المعدات</p>
+
+        <!-- عرض المنتجات -->
+        <div class="row">
+            <!-- منتج 1 (جرار) -->
+            <div class="col-md-3">
+                <div class="product-card">
+                    <img src="Ha8d80ab59b91484cb8a759cd9dc800638.jpg_720x720q50.avif" alt="جرار">
+                    <h5>جرار زراعي</h5>
+                    <p>سعر: 3000 جنيه</p>
+                    <button class="btn-buy" onclick="addToCart('جرار زراعي', 3000)"><i class="fas fa-cart-plus"></i> إضافة إلى السلة</button>
+                </div>
+            </div>
+
+            <!-- منتج 2 (معدات ري) -->
+            <div class="col-md-3">
+                <div class="product-card">
+                    <img src="896c3187d91f4a7bb849818d13.jpg@watermark=2&text=YXIuaHQtYmF1ZXIuY29t&t=75&color=I0ZGRkZGRg==&s=20&size=33&p=9_95Q.webp" alt="معدات ري">
+                    <h5>معدات ري</h5>
+                    <p>سعر: 2500 جنيه</p>
+                    <button class="btn-buy" onclick="addToCart('معدات ري', 2500)"><i class="fas fa-cart-plus"></i> إضافة إلى السلة</button>
+                </div>
+            </div>
+
+            <!-- منتج 3 (حصادة) -->
+            <div class="col-md-3">
+                <div class="product-card">
+                    <img src="حصد.jpg" alt="حصادة">
+                    <h5>حصادة</h5>
+                    <p>سعر: 8000 جنيه</p>
+                    <button class="btn-buy" onclick="addToCart('حصادة', 8000)"><i class="fas fa-cart-plus"></i> إضافة إلى السلة</button>
+                </div>
+            </div>
+
+            <!-- منتج 4 (مقعد قيادة) -->
+            <div class="col-md-3">
+                <div class="product-card">
+                    <img src=".jpg" alt="مقعد قيادة">
+                    <h5>مقعد قيادة</h5>
+                    <p>سعر: 1000 جنيه</p>
+                    <button class="btn-buy" onclick="addToCart('مقعد قيادة', 1000)"><i class="fas fa-cart-plus"></i> إضافة إلى السلة</button>
+                </div>
+            </div>
+
+            <!-- منتج 5 (آلة حصاد) -->
+            <div class="col-md-3">
+                <div class="product-card">
+                    <img src="images.jpg" alt="االة حصاد  ">
+                    <h5>آلة حصاد</h5>
+                    <p>سعر: 6000 جنيه</p>
+                    <button class="btn-buy" onclick="addToCart('آلة حصاد', 6000)"><i class="fas fa-cart-plus"></i> إضافة إلى السلة</button>
+                </div>
+            </div>
+
+            <!-- منتج 6 (نظام ري بالتنقيط) -->
+            <div class="col-md-3">
+                <div class="product-card">
+                    <img src="e5d0e02537579c0ed4d4bab210.jpg@4e_360w_360h.src_95Q.webp" alt="نظام ري بالتنقيط">
+                    <h5>نظام ري بالتنقيط</h5>
+                    <p>سعر: 1500 جنيه</p>
+                    <button class="btn-buy" onclick="addToCart('نظام ري بالتنقيط', 1500)"><i class="fas fa-cart-plus"></i> إضافة إلى السلة</button>
+                </div>
+            </div>
+
+            <!-- منتج 7 (محطة طاقة شمسية) -->
+            <div class="col-md-3">
+                <div class="product-card">
+                    <img src="250-watt-24v-pv-solar-panels053dea39-10ed-4259-8ba0-c33e2f714c8b.webp" alt="محطة طاقة شمسية">
+                    <h5>محطة طاقة شمسية</h5>
+                    <p>سعر: 9000 جنيه</p>
+                    <button class="btn-buy" onclick="addToCart('محطة طاقة شمسية', 9000)"><i class="fas fa-cart-plus"></i> إضافة إلى السلة</button>
+                </div>
+            </div>
+
+            <!-- منتج 8 (معدات زراعية متنوعة) -->
+            <div class="col-md-3">
+                <div class="product-card">
+                    <img src="1715680382410.jpg" alt="معدات زراعية">
+                    <h5>معدات زراعية متنوعة</h5>
+                    <p>سعر: 5000 جنيه</p>
+                    <button class="btn-buy" onclick="addToCart('معدات زراعية متنوعة', 5000)"><i class="fas fa-cart-plus"></i> إضافة إلى السلة</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- زر شراء السلة -->
+        <div class="mt-4">
+            <button class="btn btn-primary" onclick="showPaymentMethods()">الدفع</button>
+        </div>
+    </section>
+
+    <!-- نافذة طرق الدفع (Modal) -->
+    <div class="modal fade" id="paymentMethodsModal" tabindex="-1" aria-labelledby="paymentMethodsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="paymentMethodsModalLabel">اختار طريقة الدفع</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <button class="btn btn-success w-100" onclick="selectPaymentMethod('بطاقة ائتمانية')">بطاقة ائتمانية</button>
+                    <button class="btn btn-warning w-100 mt-2" onclick="selectPaymentMethod('دفع عند الاستلام')">دفع عند الاستلام</button>
+                    <button class="btn btn-info w-100 mt-2" onclick="selectPaymentMethod('باي بال')">باي بال</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- الفوتر -->
+    <footer class="footer">
+        <p>© 2024 منصة المزارعين. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <!-- جافا سكريبت -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let cart = [];
+
+        // إضافة منتج إلى السلة
+        function addToCart(productName, price) {
+            cart.push({ name: productName, price: price, quantity: 1 });
+            alert('تم إضافة ' + productName + ' إلى السلة');
+        }
+
+        // عرض طرق الدفع
+        function showPaymentMethods() {
+            if (cart.length === 0) {
+                alert("السلة فارغة! يجب إضافة منتجات أولاً.");
+                return;
+            }
+            // فتح نافذة طرق الدفع
+            $('#paymentMethodsModal').modal('show');
+        }
+
+        // اختيار طريقة الدفع
+        function selectPaymentMethod(method) {
+            // حفظ طريقة الدفع في LocalStorage
+            localStorage.setItem('paymentMethod', method);
+
+            // حفظ معلومات السلة في LocalStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // الانتقال إلى صفحة الدفع
+            window.location.href = 'payment.html';
+        }
+    </script>
+
+</body>
+</html>

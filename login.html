@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول | منصة المزارعين</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* تعيين ارتفاع الصفحة لتغطية الشاشة بالكامل */
+            background: url('pic.jpg') no-repeat center center fixed; /* استبدل 'pic.jpg' برابط الصورة */
+            background-size: cover; /* جعل الصورة تغطي الصفحة بالكامل */
+            font-family: 'Cairo', sans-serif;
+
+            /* استخدام Flexbox لتوسيط المحتوى */
+            display: flex;
+            justify-content: center; /* محاذاة أفقيًا */
+            align-items: center; /* محاذاة عموديًا */
+            text-align: center; /* محاذاة النص في المنتصف */
+        }
+
+        .login-container {
+            background: linear-gradient(to right, rgba(76, 175, 80, 0.8), rgba(129, 199, 132, 0.8));
+            padding: 30px;
+            border-radius: 15px;
+            width: 350px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform: scale(0.95);
+            animation: scaleUp 0.5s forwards;
+            transition: background-color 0.3s ease;
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #fff;
+            font-size: 28px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* إضافة ظل للنص لتحسين وضوحه */
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            color: #fff;
+            font-size: 14px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            margin-top: 5px;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="password"] {
+            background: #fff;
+            color: #333;
+        }
+        .form-group input[type="submit"] {
+            background: #ff9800;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+        .form-group input[type="submit"]:hover {
+            background: #ff5722;
+        }
+        .text-center {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .text-center a {
+            color: #ff9800;
+            text-decoration: none;
+        }
+        .text-center a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes scaleUp {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container" id="loginContainer">
+        <h2>تسجيل الدخول</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">اسم المستخدم</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">كلمة المرور</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="تسجيل الدخول">
+            </div>
+        </form>
+        <div class="text-center">
+            <p>ليس لديك حساب؟ <a href="register.html">إنشاء حساب جديد</a></p>
+        </div>
+    </div>
+
+    <script>
+        // عند تقديم النموذج
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();  // منع إرسال النموذج
+
+            // الحصول على البيانات من النموذج
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // التحقق من وجود البيانات في localStorage
+            const storedUsername = localStorage.getItem(username);
+
+            if (storedUsername && storedUsername === password) {
+                alert('تم تسجيل الدخول بنجاح!');
+                window.location.href = "index.html";  // توجيه إلى صفحة الترحيب
+            } else {
+                alert('اسم المستخدم أو كلمة المرور غير صحيحة.');
+            }
+        });
+
+        // تغيير لون خلفية الحاوية عند مرور الماوس
+        const loginContainer = document.getElementById('loginContainer');
+        
+        loginContainer.addEventListener('mouseover', function() {
+            loginContainer.style.backgroundColor = 'rgba(76, 175, 80, 0.7)';  // أخضر فاتح عند المرور
+        });
+        
+        loginContainer.addEventListener('mouseout', function() {
+            loginContainer.style.backgroundColor = '';  // إعادة اللون الأصلي
+        });
+    </script>
+
+</body>
+</html>

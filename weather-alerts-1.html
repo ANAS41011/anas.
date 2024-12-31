@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تنبيهات الطقس | منصة المزارعين</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href=".css">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f9f9f9;
+        }
+        
+        .header {
+            background-color: #28a745;
+            padding: 20px 0;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-nav .nav-link {
+            color: white !important;
+            font-weight: bold;
+            padding: 10px 15px;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #ffc107 !important;
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .service-detail {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .weather-info {
+            background-color: #e9ecef;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .weather-info h4 {
+            font-size: 24px;
+            color: #28a745;
+        }
+
+        .weather-info .temperature {
+            font-size: 40px;
+            font-weight: bold;
+        }
+
+        .weather-info .condition {
+            font-size: 18px;
+            color: #555;
+        }
+
+        .footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الهيدر -->
+    <header class="header sticky-top">
+        <div class="container">
+            <div class="logo">🌾 نبض الزراعة</div>
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand" href="index.html">الرئيسية</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="about-1.html">من نحن</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="services (1).html">الخدمات</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Contact (1).html">تواصل معنا</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- محتوى الخدمة -->
+    <section class="service-detail py-5">
+        <div class="container">
+            <h2>تنبيهات الطقس</h2>
+            <p>اطلع على آخر تحديثات الطقس في منطقة الإسكندرية لتكون على دراية بأي تغييرات قد تؤثر على مزروعاتك.</p>
+
+            <!-- عرض حالة الطقس -->
+            <div class="weather-info" id="weather-info">
+                <h4>طقس الإسكندرية الحالي</h4>
+                <div class="temperature" id="temperature">-</div>
+                <div class="condition" id="condition">-</div>
+            </div>
+
+            <p>يمكنك متابعة طقس الإسكندرية عبر الرابط التالي:</p>
+            <a href="https://www.google.com/search?q=weather+Alexandria" target="_blank" class="btn btn-primary">الطقس في الإسكندرية</a>
+        </div>
+    </section>
+   
+    <script>
+        // استبدل بـ API مفتوحة لجلب حالة الطقس
+        const apiKey = '0a58fde912b6e49a87f75d6e77091b8c'; // ضع هنا مفتاح API الخاص بك من OpenWeather
+        const city = 'Alexandria,EG'; // اسم المدينة
+
+        // دالة للحصول على حالة الطقس من OpenWeather API
+        function getWeather() {
+            $.ajax({
+                url: `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=ar`,
+                method: 'GET',
+                success: function(data) {
+                    // عرض درجة الحرارة وحالة الطقس
+                    $('#temperature').text(data.main.temp + '°C');
+                    $('#condition').text(data.weather[0].description);
+                },
+                error: function() {
+                    $('#weather-info').html('<h4>تعذر الحصول على الطقس الحالي.</h4>');
+                }
+            });
+        }
+
+        // استدعاء دالة الطقس عند تحميل الصفحة
+        $(document).ready(function() {
+            getWeather(); // جلب الطقس
+        });
+    </script>
+</body>
+</html> <!-- الفوتر -->
+    <footer class="footer py-4">
+        <div class="container text-center">
+            <p>© 2024 منصة المزارعين. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>

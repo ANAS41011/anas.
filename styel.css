@@ -1,0 +1,249 @@
+body {
+    font-family: 'Cairo', sans-serif;
+    line-height: 1.6;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+
+.header {
+    background: #ffffff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+
+}
+
+.header .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.hero{
+    background: url('pic.jpg') no-repeat center center/cover;
+    height: 70vh;
+    text-align: center;
+    color: #ffffff;
+}
+
+.services .card {
+    background: #ffffff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+.services .card h3 {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.footer {
+    background: #333;
+    color: #fff;
+    padding: 20px 0;
+}
+.btn-animated {
+    display: block; /* لجعل الزر يأخذ كامل المساحة */
+    padding: 20px; /* إضافة padding لجعل الزر أكبر */
+    text-align: center; /* توسيط النص داخل الزر */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px; /* إضافة مسافة بين الأزرار */
+    border-radius: 8px; /* إضافة زوايا دائرية */
+}
+
+.btn-animated:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px  rgba(255, 255, 255, 0.2);
+    text-decoration: none; /* إزالة خط تحت النص عند التمرير */
+}
+.btn-start {
+    padding: 8px 16px; /* تقليل padding لجعل الزر أصغر */
+    font-size: 14px; /* حجم الخط */
+    border-radius: 5px; /* زوايا دائرية */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-start:hover {
+    transform: translateY(-3px); /* تحريك الزر لأعلى قليلاً عند التمرير */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* إضافة ظل */
+    background-color: #ffcc00; /* تغيير لون الخلفية عند التمرير */
+    color: #000; /* تغيير لون النص عند التمرير */
+}
+ /* الهيدر */
+ .header {
+    background: rgba(0, 0, 0, 0.5); /* تغيير الخلفية لتكون شفافّة قليلاً */
+    padding: 15px 0;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    transition: background 0.3s ease;
+}
+
+.avbar-nav .nav-link {
+    color: white !important;
+    transition: color 0.3s ease, background 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ffcc00 !important;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+
+}
+
+.logo {
+    font-size: 30px;
+    color: #ffcc00;
+    font-weight: bold;
+}
+
+/* قسم Hero */
+.hero {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 100px 0;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 4rem; /* زيادة حجم النص */
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+}
+
+.hero p {
+    font-size: 1.8rem; /* تحسين وضوح النصوص */
+    color: #fff;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+}
+
+.hero .btn-warning {
+    background-color: #ffcc00;
+    border-color: #ffcc00;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.hero .btn-warning:hover {
+    background-color: #e6b800;
+    border-color: #e6b800;
+    transform: scale(1.1);
+}
+
+.hero:hover h1, .hero:hover p {
+    transform: translateY(-10px);
+    opacity: 0.9;
+}
+
+/* قسم الخدمات */
+.features {
+    background-color: #f4f4f4;
+    padding: 70px 0;
+    margin-top: 120px;
+}
+
+.features h2 {
+    font-size: 2.5rem;
+    color: #2e8b57;
+    margin-bottom: 40px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.feature-box {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    margin-bottom: 30px;
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease-in-out forwards; /* تعديل وقت الحركة */
+}
+
+.feature-box i {
+    font-size: 55px; /* زيادة حجم الأيقونات */
+    color: #2e8b57;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.feature-box h3 {
+    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.feature-box p {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+.feature-box a {
+    color: #333;
+    text-decoration: none;
+}
+
+.feature-box a:hover {
+    color: #2e8b57;
+    text-decoration: underline;
+}
+
+.feature-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 45px rgba(49, 223, 6, 0.842);
+    background-color: #00693596;
+}
+
+.feature-box:hover i {
+    transform: rotate(360deg); /* تأثير دوران على الأيقونة */
+    color: #ffffff; /* تغيير اللون عند التمرير */
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.alert {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    animation: fadeIn 1s;
+  }
+  
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .close:hover {
+    color: #ccc;
+  }

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مجتمع المزارعين</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: #f4f4f9;
+            color: #333;
+        }
+        .navbar {
+            background-color: #2d6a4f;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+        }
+        textarea {
+            border: 2px solid #4caf50;
+            border-radius: 8px;
+            padding: 0.75rem;
+            width: 100%;
+            resize: none;
+            transition: all 0.3s ease;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #388e3c;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        }
+        .btn {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #388e3c;
+        }
+        .share-options {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .share-options a {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+        .whatsapp { background: #25D366; }
+        .facebook { background: #3b5998; }
+        .twitter { background: #1DA1F2; }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h1>🌾 مجتمع المزارعين 🌱</h1>
+    </nav>
+
+    <!-- Create Post Section -->
+    <div class="container mx-auto mt-4 px-4">
+        <div class="card">
+            <textarea id="new-post-content" rows="3" placeholder="اكتب منشورك هنا..."></textarea>
+            <div class="mt-2 text-center">
+                <button class="btn" onclick="createPost()">نشر</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Posts Section -->
+    <div class="container mx-auto mt-4 px-4">
+        <div id="posts-container"></div>
+    </div>
+
+    <!-- Script -->
+    <script>
+        let posts = [];
+
+        function renderPosts() {
+            const container = document.getElementById('posts-container');
+            container.innerHTML = '';
+            posts.forEach((post, index) => {
+                const postElement = document.createElement('div');
+                postElement.className = 'card';
+                postElement.innerHTML = `
+                    <h5>👤 ${post.author}</h5>
+                    <p>${post.content}</p>
+                    <div>
+                        <button class="btn" onclick="likePost(${index})">إعجاب (${post.likes})</button>
+                        <button class="btn" onclick="showShareOptions(${index})">مشاركة</button>
+                    </div>
+                    <div id="share-options-${index}" class="share-options" style="display: none;">
+                        <a href="#" class="whatsapp" onclick="shareTo('whatsapp', '${post.content}')">واتساب</a>
+                        <a href="#" class="facebook" onclick="shareTo('facebook', '${post.content}')">فيسبوك</a>
+                        <a href="#" class="twitter" onclick="shareTo('twitter', '${post.content}')">تويتر</a>
+                    </div>
+                `;
+                container.appendChild(postElement);
+            });
+        }
+
+        function createPost() {
+            const content = document.getElementById('new-post-content').value.trim();
+            if (content) {
+                posts.unshift({
+                    author: 'مزارع مجهول',
+                    content: content,
+                    likes: 0
+                });
+                document.getElementById('new-post-content').value = '';
+                renderPosts();
+            }
+        }
+
+        function likePost(index) {
+            posts[index].likes += 1;
+            renderPosts();
+        }
+
+        function showShareOptions(index) {
+            const shareDiv = document.getElementById(`share-options-${index}`);
+            shareDiv.style.display = shareDiv.style.display === 'none' ? 'flex' : 'none';
+        }
+
+        function shareTo(platform, content) {
+            const encodedContent = encodeURIComponent(content);
+            let url = '';
+            switch(platform) {
+                case 'whatsapp':
+                    url = `https://wa.me/?text=${encodedContent}`;
+                    break;
+                case 'facebook':
+                    url = `https://www.facebook.com/sharer/sharer.php?u=${encodedContent}`;
+                    break;
+                case 'twitter':
+                    url = `https://twitter.com/intent/tweet?text=${encodedContent}`;
+                    break;
+            }
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>

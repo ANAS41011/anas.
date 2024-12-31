@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التواصل مع الخبراء | منصة المزارعين</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+        .header {
+            background-color: #28a745;
+            padding: 15px 0;
+            color: white;
+        }
+        .navbar-nav .nav-link {
+            color: white;
+            font-weight: bold;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #ffc107;
+        }
+        .service-detail h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .consultation-form {
+            margin-top: 30px;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+        }
+        .footer p {
+            margin: 0;
+        }
+        .chatbox-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            height: 450px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .chatbox-header {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+        .chatbox-body {
+            padding: 15px;
+            flex-grow: 1;
+            overflow-y: auto;
+            height: 300px;
+        }
+        .chatbox-footer {
+            padding: 10px;
+        display: flex;
+            gap: 10px;
+        }
+        .chatbox-footer input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .chatbox-footer button {
+            padding: 10px;
+            background-color: #28a745;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #mic {
+            background-color: #ffc107;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الهيدر -->
+    <header class="header sticky-top">
+        <div class="container">
+            <div class="logo">🌾 نبض الزراعة</div>
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand" href="index.html">الرئيسية</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="about-1.html">من نحن</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="services (1).html">الخدمات</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Contact (1).html">تواصل معنا</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- محتوى الخدمة -->
+    <section class="service-detail py-5">
+        <div class="container text-center">
+            <h2>التواصل مع الخبراء</h2>
+            <p>استشر الخبراء الزراعيين للحصول على نصائح وتوجيهات حول كيفية تحسين إنتاجك الزراعي.</p>
+            <div class="consultation-form">
+                <h3>للتواصل مع الخبير:</h3>
+                <form action="submit_form.php" method="POST">
+                    <div class="form-group">
+                        <label for="name">الاسم</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">الرسالة</label>
+                        <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">إرسال</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- شات AI -->
+    <div id="chatbox" class="chatbox-container">
+        <div class="chatbox-header">شات مع الخبير</div>
+        <div id="chat-body" class="chatbox-body">
+            <p><strong>AI:</strong> مرحباً! كيف يمكنني مساعدتك اليوم؟</p>
+        </div>
+        <div class="chatbox-footer">
+            <input type="text" id="user-input" placeholder="اكتب سؤالك هنا..." />
+            <button onclick="startRecognition()" id="mic">🎤</button>
+            <button onclick="sendMessage()">إرسال</button>
+        </div>
+    </div>
+
+    <footer class="footer py-4">
+        <div class="container text-center">
+            <p>© 2024 منصة المزارعين. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Toggle chatbox visibility
+        $(document).ready(function() {
+            $('<button id="chat-toggle">💬</button>').appendTo('body').css({
+                position: 'fixed',
+                bottom: '20px',
+                right: '20px',
+                background: '#28a745',
+                border: 'none',
+                padding: '15px',
+                borderRadius: '50%',
+                color: 'white',
+                fontSize: '20px',
+                cursor: 'pointer'
+            }).click(function() {
+                $('#chatbox').toggle();
+            });
+        });
+
+        // Speech Recognition
+        var recognition;
+        function startRecognition() {
+            if (!('webkitSpeechRecognition' in window)) {
+                alert('ميزة التعرف على الصوت غير مدعومة في هذا المتصفح.');
+                return;
+            }
+            recognition = new webkitSpeechRecognition();
+            recognition.lang = 'ar-SA';
+            recognition.interimResults = false;
+
+            recognition.onresult = function(event) {
+                var transcript = event.results[0][0].transcript;
+                document.getElementById('user-input').value = transcript;
+            };
+
+            recognition.onerror = function(event) {
+                console.error('حدث خطأ في التعرف على الصوت:', event.error);
+            };
+
+            recognition.start();
+        }
+
+        // Send message to AI chat (mock response)
+        function sendMessage() {
+            var userMessage = $('#user-input').val();
+            if (userMessage) {
+                $('#chat-body').append('<p><strong>أنت:</strong> ' + userMessage + '</p>');
+                $('#user-input').val('');
+
+                // Mock AI response (can be replaced with actual API call)
+                setTimeout(function() {
+                    $('#chat-body').append('<p><strong>AI:</strong> هذا سؤال جيد! سأبحث عن الإجابة الآن.</p>');
+                    $('#chat-body').scrollTop($('#chat-body')[0].scrollHeight);
+                }, 1000);
+            }
+        }
+    </script>
+</body>
+</html>
