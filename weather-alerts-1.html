@@ -123,12 +123,18 @@
     </section>
    
     <script>
-        // استبدل بـ API مفتوحة لجلب حالة الطقس
-        const apiKey = '0a58fde912b6e49a87f75d6e77091b8c'; // ضع هنا مفتاح API الخاص بك من OpenWeather
+       
+       
+       
+       // استبدل بـ API مفتوحة لجلب حالة الطقس
+        const apiKey = "3650b1f9232f4b8d911192734251004"
+
+
         const city = 'Alexandria,EG'; // اسم المدينة
 
         // دالة للحصول على حالة الطقس من OpenWeather API
-        function getWeather() {
+        function getWeather(b2d9ef58275929a56b86978836e2233a
+        ) {
             $.ajax({
                 url: `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=ar`,
                 method: 'GET',
@@ -143,6 +149,8 @@
             });
         }
 
+
+        
         // استدعاء دالة الطقس عند تحميل الصفحة
         $(document).ready(function() {
             getWeather(); // جلب الطقس
@@ -158,3 +166,43 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الطقس</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const apiKey = '3650b1f9232f4b8d911192734251004'; // ضع هنا مفتاح API الخاص بك
+            const city = 'Cairo'; // اسم المدينة اللي عايز الطقس ليها
+            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=ar`;
+
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('لم يتم العثور على المدينة');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const weatherInfo = `
+                        <h2>حالة الطقس في ${data.name}</h2>
+                        <p>درجة الحرارة: ${data.main.temp}°C</p>
+                        <p>الرطوبة: ${data.main.humidity}%</p>
+                        <p>الوصف: ${data.weather[0].description}</p>
+                    `;
+                    document.getElementById('weather').innerHTML = weatherInfo;
+                })
+                .catch(error => {
+                    document.getElementById('weather').innerHTML = `<p>${error.message}</p>`;
+                });
+        });
+    </script>
+</head>
+<body>
+    <div id="weather">
+        <p>جاري تحميل بيانات الطقس...</p>
+    </div>
+</body>
+</html>

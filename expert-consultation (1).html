@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
     <style>
         body {
             font-family: 'Cairo', sans-serif;
@@ -37,6 +36,7 @@
         .footer {
             background-color: #333;
             color: white;
+            padding: 20px 0;
         }
         .footer p {
             margin: 0;
@@ -54,6 +54,7 @@
             flex-direction: column;
             justify-content: space-between;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
         }
         .chatbox-header {
             background-color: #28a745;
@@ -70,7 +71,7 @@
         }
         .chatbox-footer {
             padding: 10px;
-        display: flex;
+            display: flex;
             gap: 10px;
         }
         .chatbox-footer input {
@@ -93,6 +94,57 @@
             border: none;
             cursor: pointer;
             border-radius: 5px;
+        }
+        /* أنماط الشات بوكس الذكي */
+        .message {
+            margin-bottom: 10px;
+            padding: 10px 15px;
+            border-radius: 15px;
+            max-width: 80%;
+            word-wrap: break-word;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .message.user {
+            background-color: #dcf8c6;
+            margin-left: auto;
+            margin-right: 10px;
+            border-bottom-right-radius: 5px;
+        }
+        .message.bot {
+            background-color: #e9ecef;
+            margin-right: auto;
+            margin-left: 10px;
+            border-bottom-left-radius: 5px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .typing-indicator {
+            display: inline-block;
+            padding: 10px 15px;
+        }
+        .typing-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #888;
+            margin: 0 2px;
+            animation: typingAnimation 1.4s infinite ease-in-out;
+        }
+        .typing-dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        @keyframes typingAnimation {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
         }
     </style>
 </head>
@@ -146,12 +198,17 @@
         </div>
     </section>
 
-    <!-- شات AI -->
-    <div id="chatbox" class="chatbox-container">
-        <div class="chatbox-header">شات مع الخبير</div>
-        <div id="chat-body" class="chatbox-body">
-            <p><strong>AI:</strong> مرحباً! كيف يمكنني مساعدتك اليوم؟</p>
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="container text-center">
+            <p>© 2025 منصة المزارعين. جميع الحقوق محفوظة.</p>
         </div>
+    </footer>
+
+    <!-- شات بوكس ذكي -->
+    <div id="chatbox" class="chatbox-container">
+        <div class="chatbox-header">مساعد الزراعة الذكي</div>
+        <div id="chat-body" class="chatbox-body"></div>
         <div class="chatbox-footer">
             <input type="text" id="user-input" placeholder="اكتب سؤالك هنا..." />
             <button onclick="startRecognition()" id="mic">🎤</button>
@@ -159,19 +216,100 @@
         </div>
     </div>
 
-    <footer class="footer py-4">
-        <div class="container text-center">
-            <p>© 2024 منصة المزارعين. جميع الحقوق محفوظة.</p>
-        </div>
-    </footer>
+    <button id="chat-toggle">💬</button>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // Toggle chatbox visibility
+        // نظام الذكاء الاصطناعي للشات بوكس
+        class SmartChatbot {
+            constructor() {
+                this.responses = {
+                    'مرحبا': 'مرحباً بك! كيف يمكنني مساعدتك في شؤون الزراعة اليوم؟ 🌱',
+                    'اهلا': 'أهلاً وسهلاً! كيف حالك؟',
+                    'سلام': 'وعليكم السلام ورحمة الله وبركاته',
+                    'شكرا': 'العفو! دائماً بخدمتك.',
+                    'متشكر': 'الشكر لله! تفضل أي استفسار زراعي آخر؟',
+                    'وقت': this.getCurrentTime,
+                    'الساعة': this.getCurrentTime,
+                    'امك حلوه': 'أمك أحلى وأجمل! ❤️',
+                    'أمك جميلة': 'كل الأمهات جميلات! 🌹',
+                    'اسمك': 'أنا مساعدك الزراعي الذكي!',
+                    'مين انت': 'أنا خبير زراعي افتراضي، هنا لمساعدتك في أي استفسار عن الزراعة!',
+                    'زراعة': 'يمكنك سؤالي عن أنواع المحاصيل، مواعيد الزراعة، طرق الري، أو أي استفسار زراعي آخر',
+                    'محاصيل': 'هناك العديد من المحاصيل مثل القمح، الأرز، الذرة، الخضروات والفواكه. عن أي محصول تريد الاستفسار؟',
+                    'ري': 'أنظمة الري تشمل الري بالتنقيط، الري بالرش، والري السطحي. أي نظام تريد معرفة المزيد عنه؟'
+                };
+                this.loadCustomResponses();
+            }
+            
+            getCurrentTime() {
+                const now = new Date();
+                return `الساعة الآن هي: ${now.toLocaleTimeString('ar-EG')}`;
+            }
+            
+            saveCustomResponses() {
+                const customResponses = {};
+                for (const [key, value] of Object.entries(this.responses)) {
+                    if (![
+                        'مرحبا', 'اهلا', 'سلام', 'شكرا', 'متشكر', 
+                        'وقت', 'الساعة', 'امك حلوه', 'أمك جميلة', 
+                        'اسمك', 'مين انت', 'زراعة', 'محاصيل', 'ري'
+                    ].includes(key)) {
+                        customResponses[key] = value;
+                    }
+                }
+                localStorage.setItem('customResponses', JSON.stringify(customResponses));
+            }
+            
+            loadCustomResponses() {
+                const savedResponses = localStorage.getItem('customResponses');
+                if (savedResponses) {
+                    const customResponses = JSON.parse(savedResponses);
+                    for (const [key, value] of Object.entries(customResponses)) {
+                        this.responses[key] = value;
+                    }
+                }
+            }
+            
+            learn(question, answer) {
+                this.responses[question.toLowerCase()] = answer;
+                this.saveCustomResponses();
+            }
+            
+            getResponse(message) {
+                const lowerMsg = message.toLowerCase();
+                
+                // معالجة أمر التعلم
+                if (lowerMsg.startsWith('تعلم-')) {
+                    const parts = message.split('-').map(p => p.trim());
+                    if (parts.length >= 3) {
+                        const question = parts[1];
+                        const answer = parts.slice(2).join('-');
+                        this.learn(question, answer);
+                        return `تم تعليمي بنجاح! الآن عندما تقول "${question}" سأرد بـ "${answer}"`;
+                    }
+                    return 'استخدم الصيغة: تعلم-السؤال-الجواب';
+                }
+                
+                // البحث عن رد مطابق
+                for (const [question, response] of Object.entries(this.responses)) {
+                    if (lowerMsg.includes(question.toLowerCase())) {
+                        return typeof response === 'function' ? response() : response;
+                    }
+                }
+                
+                // إذا لم يتعرف على الرسالة
+                return 'لم أفهم سؤالك الزراعي. يمكنك تعليمي بالصيغة: تعلم-السؤال-الجواب';
+            }
+        }
+
+        const chatbot = new SmartChatbot();
+        
+        // عرض/إخفاء الشات بوكس
         $(document).ready(function() {
-            $('<button id="chat-toggle">💬</button>').appendTo('body').css({
+            $('#chat-toggle').css({
                 position: 'fixed',
                 bottom: '20px',
                 right: '20px',
@@ -181,49 +319,104 @@
                 borderRadius: '50%',
                 color: 'white',
                 fontSize: '20px',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                zIndex: '1001'
             }).click(function() {
                 $('#chatbox').toggle();
             });
+            
+            // رسالة ترحيبية
+            setTimeout(() => {
+                addBotMessage("مرحباً! أنا المساعد الزراعي الذكي. يمكنك سؤالي عن أي موضوع زراعي أو تعليمي ردود جديدة باستخدام: تعلم-السؤال-الجواب");
+            }, 800);
         });
 
-        // Speech Recognition
+        // التعرف على الصوت
         var recognition;
         function startRecognition() {
             if (!('webkitSpeechRecognition' in window)) {
-                alert('ميزة التعرف على الصوت غير مدعومة في هذا المتصفح.');
+                addBotMessage('عذراً، ميزة التعرف على الصوت غير مدعومة في متصفحك');
                 return;
             }
+            
             recognition = new webkitSpeechRecognition();
             recognition.lang = 'ar-SA';
             recognition.interimResults = false;
 
             recognition.onresult = function(event) {
-                var transcript = event.results[0][0].transcript;
-                document.getElementById('user-input').value = transcript;
+                const transcript = event.results[0][0].transcript;
+                $('#user-input').val(transcript);
+                sendMessage();
             };
 
             recognition.onerror = function(event) {
-                console.error('حدث خطأ في التعرف على الصوت:', event.error);
+                addBotMessage('حدث خطأ في التعرف على الصوت: ' + event.error);
             };
 
             recognition.start();
+            addBotMessage('أنا أستمع لك الآن...');
         }
 
-        // Send message to AI chat (mock response)
+        // إرسال رسالة
         function sendMessage() {
-            var userMessage = $('#user-input').val();
+            const userMessage = $('#user-input').val().trim();
             if (userMessage) {
-                $('#chat-body').append('<p><strong>أنت:</strong> ' + userMessage + '</p>');
+                addUserMessage(userMessage);
                 $('#user-input').val('');
-
-                // Mock AI response (can be replaced with actual API call)
-                setTimeout(function() {
-                    $('#chat-body').append('<p><strong>AI:</strong> هذا سؤال جيد! سأبحث عن الإجابة الآن.</p>');
-                    $('#chat-body').scrollTop($('#chat-body')[0].scrollHeight);
-                }, 1000);
+                
+                // عرض مؤشر الكتابة
+                showTypingIndicator();
+                
+                setTimeout(() => {
+                    hideTypingIndicator();
+                    const response = chatbot.getResponse(userMessage);
+                    addBotMessage(response);
+                }, 800 + Math.random() * 1000);
             }
         }
+
+        // إضافة رسالة المستخدم
+        function addUserMessage(text) {
+            $('#chat-body').append(`<div class="message user">${text}</div>`);
+            scrollChatToBottom();
+        }
+
+        // إضافة رسالة البوت
+        function addBotMessage(text) {
+            $('#chat-body').append(`<div class="message bot">${text}</div>`);
+            scrollChatToBottom();
+        }
+
+        // التمرير للأسفل
+        function scrollChatToBottom() {
+            const chatBody = $('#chat-body')[0];
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        // مؤشر الكتابة
+        function showTypingIndicator() {
+            $('#chat-body').append(`
+                <div id="typing-indicator" class="message bot">
+                    <div class="typing-indicator">
+                        <span class="typing-dot"></span>
+                        <span class="typing-dot"></span>
+                        <span class="typing-dot"></span>
+                    </div>
+                </div>
+            `);
+            scrollChatToBottom();
+        }
+
+        function hideTypingIndicator() {
+            $('#typing-indicator').remove();
+        }
+
+        // إرسال بالضغط على Enter
+        $('#user-input').keypress(function(e) {
+            if (e.which === 13) {
+                sendMessage();
+            }
+        });
     </script>
 </body>
 </html>

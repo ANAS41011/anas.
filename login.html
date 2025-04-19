@@ -1,3 +1,6 @@
+<?php
+include("database.php");
+?>
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -9,16 +12,27 @@
         body {
             margin: 0;
             padding: 0;
-            height: 100vh; /* تعيين ارتفاع الصفحة لتغطية الشاشة بالكامل */
-            background: url('pic.jpg') no-repeat center center fixed; /* استبدل 'pic.jpg' برابط الصورة */
-            background-size: cover; /* جعل الصورة تغطي الصفحة بالكامل */
+            height: 100vh; 
+            background: url('pic.jpg') no-repeat center center fixed; 
+            background-size: cover; 
             font-family: 'Cairo', sans-serif;
 
-            /* استخدام Flexbox لتوسيط المحتوى */
+           
             display: flex;
-            justify-content: center; /* محاذاة أفقيًا */
-            align-items: center; /* محاذاة عموديًا */
-            text-align: center; /* محاذاة النص في المنتصف */
+            justify-content: center; 
+            align-items: center;
+            text-align: center;
+        }
+
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+            color: #fff;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
         }
 
         .login-container {
@@ -89,10 +103,24 @@
                 opacity: 1;
             }
         }
+
+        .forgot-password-container {
+            display: none;
+            background: linear-gradient(to right, rgba(76, 175, 80, 0.8), rgba(129, 199, 132, 0.8));
+            padding: 30px;
+            border-radius: 15px;
+            width: 350px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        .forgot-password-container.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
 
+    
+    
     <div class="login-container" id="loginContainer">
         <h2>تسجيل الدخول</h2>
         <form id="loginForm">
@@ -109,39 +137,81 @@
             </div>
         </form>
         <div class="text-center">
+            <p><a href="#" id="forgotPasswordLink">نسيت كلمة المرور؟</a></p>
             <p>ليس لديك حساب؟ <a href="register.html">إنشاء حساب جديد</a></p>
         </div>
     </div>
 
-    <script>
-        // عند تقديم النموذج
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();  // منع إرسال النموذج
+    
+    <div class="forgot-password-container" id="forgotPasswordContainer">
+        <h2>استعادة كلمة المرور</h2>
+        <form id="forgotPasswordForm">
+            <div class="form-group">
+                <label for="phoneNumber">رقم الهاتف</label>
+                <input type="text" id="phoneNumber" name="phoneNumber" required>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="إرسال الرمز">
+            </div>
+        </form>
+        <div class="text-center">
+            <p><a href="#" id="backToLoginLink">العودة إلى تسجيل الدخول</a></p>
+        </div>
+    </div>
 
-            // الحصول على البيانات من النموذج
+    <script>
+       
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();  
+
+          
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            // التحقق من وجود البيانات في localStorage
+           
             const storedUsername = localStorage.getItem(username);
 
             if (storedUsername && storedUsername === password) {
                 alert('تم تسجيل الدخول بنجاح!');
-                window.location.href = "index.html";  // توجيه إلى صفحة الترحيب
+                window.location.href = "index.html"; 
             } else {
                 alert('اسم المستخدم أو كلمة المرور غير صحيحة.');
             }
         });
 
-        // تغيير لون خلفية الحاوية عند مرور الماوس
+       
+        document.getElementById('forgotPasswordLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('forgotPasswordContainer').classList.add('active');
+        });
+
+       
+        document.getElementById('backToLoginLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('forgotPasswordContainer').classList.remove('active');
+            document.getElementById('loginContainer').style.display = 'block';
+        });
+
+      
+        document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
+            e.preventDefault(); 
+           
+            const phoneNumber = document.getElementById('phoneNumber').value;
+
+           
+            alert(`تم إرسال رمز استعادة الحساب إلى الرقم: ${phoneNumber}`);
+        });
+
+         
         const loginContainer = document.getElementById('loginContainer');
         
         loginContainer.addEventListener('mouseover', function() {
-            loginContainer.style.backgroundColor = 'rgba(76, 175, 80, 0.7)';  // أخضر فاتح عند المرور
+            loginContainer.style.backgroundColor = 'rgba(76, 175, 80, 0.7)'; 
         });
         
         loginContainer.addEventListener('mouseout', function() {
-            loginContainer.style.backgroundColor = '';  // إعادة اللون الأصلي
+            loginContainer.style.backgroundColor = ''; 
         });
     </script>
 

@@ -3,65 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>من نحن | منصة المزارعين</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <title>من نحن | منصة المزارعين - حلول زراعية متكاملة للمزارعين العرب</title>
+    <meta name="description" content="منصة المزارعين تقدم حلول زراعية متكاملة، استشارات زراعية، تقنيات حديثة وسوق إلكتروني لتمكين المزارعين في العالم العربي">
+    <meta name="keywords" content="زراعة, مزارعين, حلول زراعية, سوق زراعي, استشارات زراعية">
+    <meta name="author" content="منصة المزارعين">
+    
+    <!-- Preload أهم الموارد -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap"></noscript>
+    
+    <!-- نظام الألوان -->
+    <meta name="theme-color" content="#28a745">
+    <meta name="msapplication-navbutton-color" content="#28a745">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#28a745">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "منصة المزارعين",
+      "url": "https://example.com",
+      "logo": "https://example.com/logo.png",
+      "description": "منصة متكاملة تقدم حلول زراعية للمزارعين العرب",
+      "sameAs": [
+        "https://www.facebook.com/Faisal.Amin.1882008",
+        "https://wa.me/+201276351643"
+      ]
+    }
+    </script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
     <style>
-        /* تنسيق عام */
-        body {
-            font-family: 'Cairo', sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
+        :root {
+            --primary-color: #28a745;
+            --primary-dark: #218838;
+            --secondary-color: #ffc107;
+            --dark-color: #343a40;
+            --light-color: #f8f9fa;
+            --body-color: #f4f4f4;
+            --text-color: #333;
+            --text-light: #777;
+            --transition: all 0.3s ease;
+            --shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Dark Mode Variables */
+        [data-theme="dark"] {
+            --body-color: #121212;
+            --text-color: #f8f9fa;
+            --text-light: #adb5bd;
+            --light-color: #212529;
+            --shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.4);
         }
 
-        /* الهيدر */
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--body-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            transition: var(--transition);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background: transparent;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: var(--primary-color);
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        /* Header */
         .header {
-            background-color: #28a745;
-            padding: 20px 0;
+            background-color: var(--primary-color);
+            padding: 15px 0;
             color: white;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            transition: var(--transition);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-left: 10px;
         }
 
         .navbar-nav .nav-link {
             color: white !important;
             font-weight: bold;
             padding: 10px 15px;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .navbar-nav .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            right: 15px;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: var(--transition);
+        }
+
+        .navbar-nav .nav-link:hover::after {
+            width: calc(100% - 30px);
         }
 
         .navbar-nav .nav-link:hover {
-            color: #ffc107 !important;
+            color: var(--secondary-color) !important;
         }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
+        /* Dark Mode Toggle */
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-right: 15px;
+            transition: var(--transition);
         }
 
-        /* قسم "من نحن" */
+        .theme-toggle:hover {
+            color: var(--secondary-color);
+            transform: rotate(30deg);
+        }
+
+        /* About Section */
         .about {
-            padding: 70px 0;
-            background-color: #ffffff;
+            padding: 100px 0;
+            background-color: var(--light-color);
             text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
         }
 
         .about h2 {
             font-size: 2.8rem;
-            color: #333;
-            margin-bottom: 20px;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .about h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
         }
 
         .about p {
             font-size: 1.3rem;
-            color: #555;
-            line-height: 1.6;
+            color: var(--text-light);
+            line-height: 1.8;
             max-width: 800px;
             margin: 0 auto 40px;
         }
 
-        /* قسم الملخص */
+        /* Key Items */
         .key-items {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -70,91 +200,185 @@
         }
 
         .key-items .item {
-            background-color: #fff;
+            background-color: var(--light-color);
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
             text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.1);
         }
 
         .key-items .item:hover {
             transform: translateY(-10px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary-color);
         }
 
         .key-items .item i {
             font-size: 3rem;
-            color: #28a745;
+            color: var(--primary-color);
             margin-bottom: 15px;
+            transition: var(--transition);
+        }
+
+        .key-items .item:hover i {
+            transform: scale(1.1);
+            color: var(--secondary-color);
         }
 
         .key-items .item h4 {
             font-size: 1.8rem;
-            color: #333;
-            margin-bottom: 10px;
+            color: var(--text-color);
+            margin-bottom: 15px;
         }
 
         .key-items .item p {
             font-size: 1rem;
-            color: #777;
+            color: var(--text-light);
+            margin-bottom: 0;
         }
 
-        /* الفوتر */
-        .footer {
-            background-color: #333;
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
             color: white;
-            padding: 20px 0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 99;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .back-to-top:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-5px);
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 40px 0 20px;
             text-align: center;
+            transition: var(--transition);
         }
 
         .footer p {
             margin: 0;
         }
-        
+
+        .footer .social-icons {
+            margin: 20px 0;
+        }
+
         .footer .social-icons a {
             color: white;
             margin: 0 10px;
             font-size: 1.5rem;
-            transition: color 0.3s;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .footer .social-icons a:hover {
+            transform: translateY(-5px);
         }
 
         .footer .social-icons a[href*="facebook.com"]:hover {
-            color: #0026e1;
-        }
-        .footer .social-icons a:hover {
-            color: #20c100;
+            color: #4267B2;
         }
 
+        .footer .social-icons a[href*="whatsapp.com"]:hover {
+            color: #25D366;
+        }
 
-        /* تحسينات للتوافق مع الشاشات الصغيرة */
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about {
+                padding: 70px 0;
+            }
+            
+            .about h2 {
+                font-size: 2.4rem;
+            }
+            
+            .about p {
+                font-size: 1.1rem;
+            }
+        }
+
         @media (max-width: 768px) {
             .about h2 {
                 font-size: 2rem;
             }
-
+            
             .key-items {
                 grid-template-columns: 1fr;
+                gap: 20px;
             }
-
+            
             .key-items .item {
                 padding: 20px;
             }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
         }
-
     </style>
 </head>
 <body>
 
-    <!-- الهيدر -->
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Header -->
     <header class="header sticky-top">
         <div class="container">
-            <div class="logo">🌾 نبض الزراعة</div>
             <nav class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand" href="index.html">الرئيسية</a>
+                <a class="navbar-brand logo" href="index.html">
+                    <i class="fas fa-leaf"></i>
+                    <span>نبض الزراعة</span>
+                </a>
+                
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
@@ -170,57 +394,189 @@
                             <a class="nav-link" href="Contact (1).html">تواصل معنا</a>
                         </li>
                     </ul>
+                    
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
                 </div>
             </nav>
         </div>
     </header>
 
-    <!-- قسم من نحن -->
+    <!-- About Section -->
     <section class="about">
         <div class="container">
-            <h2>من نحن</h2>
-            <p>منصة المزارعين هي منصة مبتكرة تهدف إلى تقديم حلول زراعية متكاملة للمزارعين في جميع أنحاء العالم العربي. نحن نقدم استشارات زراعية، تقنيات زراعية حديثة، ونظام سوق إلكتروني لتمكين المزارعين من تسويق منتجاتهم بكفاءة وفعالية.</p>
+            <h2 class="animate">من نحن</h2>
+            <p class="animate">منصة المزارعين هي منصة مبتكرة تهدف إلى تقديم حلول زراعية متكاملة للمزارعين في جميع أنحاء العالم العربي. نحن نقدم استشارات زراعية، تقنيات زراعية حديثة، ونظام سوق إلكتروني لتمكين المزارعين من تسويق منتجاتهم بكفاءة وفعالية.</p>
 
-            <h3 class="mt-5">نحن نقدم لك:</h3>
+            <h3 class="mt-5 mb-4 animate">نحن نقدم لك:</h3>
             <div class="key-items">
-                <div class="item">
+                <div class="item animate" style="animation-delay: 0.1s">
                     <i class="fas fa-seedling"></i>
                     <h4>حلول زراعية مبتكرة</h4>
-                    <p>استشارات زراعية متخصصة لمساعدة المزارعين على تحسين الإنتاجية وزيادة الكفاءة.</p>
+                    <p>استشارات زراعية متخصصة لمساعدة المزارعين على تحسين الإنتاجية وزيادة الكفاءة باستخدام أحدث التقنيات.</p>
                 </div>
-                <div class="item">
+                <div class="item animate" style="animation-delay: 0.2s">
                     <i class="fas fa-users"></i>
                     <h4>دعم مستمر للمزارعين</h4>
-                    <p>نقدم خدمات دعم استشارية طوال العام لضمان نجاح كل موسم زراعي.</p>
+                    <p>فريق دعم فني متخصص متاح على مدار الساعة لمساعدة المزارعين في حل المشكلات التي تواجههم.</p>
                 </div>
-                <div class="item">
+                <div class="item animate" style="animation-delay: 0.3s">
                     <i class="fas fa-laptop-house"></i>
                     <h4>تقنيات حديثة</h4>
-                    <p>استخدام أحدث الأدوات والتقنيات الزراعية لزيادة جودة المحاصيل وزيادة العائد.</p>
+                    <p>نوفر أحدث الأدوات والتقنيات الذكية لمراقبة المحاصيل وتحليل البيانات لتحقيق أفضل النتائج.</p>
                 </div>
-                <div class="item">
+                <div class="item animate" style="animation-delay: 0.4s">
                     <i class="fas fa-store"></i>
                     <h4>سوق إلكتروني</h4>
-                    <p>نوفر لك منصة رقمية لعرض وبيع المنتجات الزراعية بكل سهولة.</p>
+                    <p>منصة متكاملة تربط المزارعين بالمشترين مباشرة بدون وسطاء لتحقيق أعلى ربحية.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- الفوتر -->
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>© 2025 منصة المزارعين. جميع الحقوق محفوظة.</p>
-            <div class="social-icons">
-                <a href="https://wa.me/+201276351643" title="واتساب"><i class="fab fa-whatsapp"></i></a>
-                <a href="https://www.facebook.com/amin.ebrahim.31508/" title="فيسبوك"><i class="fab fa-facebook-f"></i></a>
+            <div class="row">
+                <div class="col-md-6 animate">
+                    <h4>نبض الزراعة</h4>
+                    <p>منصة متكاملة تهدف إلى تطوير القطاع الزراعي في العالم العربي عبر تقديم حلول تقنية وعملية.</p>
+                </div>
+                <div class="col-md-6 animate">
+                    <h4>تواصل معنا</h4>
+                    <div class="social-icons">
+                        <a href="https://wa.me/+201276351643" title="واتساب"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.facebook.com/Faisal.Amin.1882008" title="فيسبوك"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="تويتر"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="إنستجرام"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
             </div>
+            <hr style="background-color: rgba(255,255,255,0.1);">
+            <p class="mb-0">© 2025 منصة المزارعين. جميع الحقوق محفوظة.</p>
         </div>
     </footer>
 
-    <!-- إضافة جافا سكربت -->
+    <!-- JavaScript -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Dark Mode Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        let darkMode = localStorage.getItem('darkMode');
+        
+        // Check for saved user preference
+        if (darkMode === 'enabled') {
+            body.setAttribute('data-theme', 'dark');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                localStorage.setItem('darkMode', 'disabled');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                localStorage.setItem('darkMode', 'enabled');
+            }
+        });
+        
+        // Scroll Progress Bar
+        window.onscroll = function() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+            
+            // Back to Top Button
+            const backToTop = document.getElementById('backToTop');
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
+        };
+        
+        // Back to Top Function
+        document.getElementById('backToTop').addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Animation on Scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+        
+        // Run animation on load and scroll
+        window.addEventListener('load', animateOnScroll);
+        window.addEventListener('scroll', animateOnScroll);
+        
+        // Preloader (example - can be customized)
+        window.addEventListener('load', function() {
+            const preloader = document.createElement('div');
+            preloader.style.position = 'fixed';
+            preloader.style.top = '0';
+            preloader.style.left = '0';
+            preloader.style.width = '100%';
+            preloader.style.height = '100%';
+            preloader.style.backgroundColor = 'var(--primary-color)';
+            preloader.style.display = 'flex';
+            preloader.style.alignItems = 'center';
+            preloader.style.justifyContent = 'center';
+            preloader.style.zIndex = '9999';
+            preloader.style.transition = 'opacity 0.5s ease';
+            
+            const loader = document.createElement('div');
+            loader.style.border = '5px solid #f3f3f3';
+            loader.style.borderTop = '5px solid var(--secondary-color)';
+            loader.style.borderRadius = '50%';
+            loader.style.width = '50px';
+            loader.style.height = '50px';
+            loader.style.animation = 'spin 1s linear infinite';
+            
+            preloader.appendChild(loader);
+            document.body.appendChild(preloader);
+            
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.remove();
+                }, 500);
+            }, 1000);
+            
+            // Add spin animation
+            const style = document.createElement('style');
+            style.innerHTML = `
+                @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
 </body>
 </html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شات بوكس ذكي</title>
+    <style>
+        body {
+            font-family: 'Tahoma', Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .chat-container {
+            width: 400px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            border-bottom: 1px solid #ddd;
+            height: 300px;
+        }
+        .message {
+            margin-bottom: 10px;
+            padding: 10px 15px;
+            border-radius: 15px;
+            max-width: 80%;
+            word-wrap: break-word;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .message.user {
+            background-color: #dcf8c6;
+            margin-left: auto;
+            margin-right: 10px;
+            border-bottom-right-radius: 5px;
+        }
+        .message.bot {
+            background-color: #e9ecef;
+            margin-right: auto;
+            margin-left: 10px;
+            border-bottom-left-radius: 5px;
+        }
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+        .chat-input input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+            font-family: 'Tahoma', Arial, sans-serif;
+        }
+        .chat-input button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            margin-left: 0;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Tahoma', Arial, sans-serif;
+            transition: background-color 0.3s;
+        }
+        .chat-input button:hover {
+            background-color: #0056b3;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .typing-indicator {
+            display: inline-block;
+            padding: 10px 15px;
+        }
+        .typing-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #888;
+            margin: 0 2px;
+            animation: typingAnimation 1.4s infinite ease-in-out;
+        }
+        .typing-dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        @keyframes typingAnimation {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">شات بوكس ذكي</div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="اكتب رسالتك هنا..." />
+            <button onclick="sendMessage()">إرسال</button>
+        </div>
+    </div>
+
+    <script>
+        // نظام الذكاء الاصطناعي مع حفظ الردود
+        class SmartChatbot {
+            constructor() {
+                this.responses = {
+                    'مرحبا': 'مرحباً بك! كيف يمكنني مساعدتك اليوم؟ 😊',
+                    'اهلا': 'أهلاً وسهلاً! كيف حالك؟',
+                    'سلام': 'وعليكم السلام ورحمة الله وبركاته',
+                    'شكرا': 'العفو! دائماً بخدمتك.',
+                    'متشكر': 'الشكر لله! تفضل أي استفسار آخر؟',
+                    'وقت': this.getCurrentTime,
+                    'الساعة': this.getCurrentTime,
+                    'امك حلوه': 'أمك أحلى وأجمل! ❤️',
+                    'أمك جميلة': 'كل الأمهات جميلات! 🌹',
+                    'اسمك': 'أنا مساعدك الذكي!',
+                    'مين انت': 'أنا رفيقك الرقمي، هنا لمساعدتك في أي شيء!'
+                };
+                this.loadCustomResponses();
+            }
+            
+            getCurrentTime() {
+                const now = new Date();
+                return `الساعة الآن هي: ${now.toLocaleTimeString('ar-EG')}`;
+            }
+            
+            saveCustomResponses() {
+                const customResponses = {};
+                for (const [key, value] of Object.entries(this.responses)) {
+                    if (![
+                        'مرحبا', 'اهلا', 'سلام', 'شكرا', 'متشكر', 
+                        'وقت', 'الساعة', 'امك حلوه', 'أمك جميلة', 
+                        'اسمك', 'مين انت'
+                    ].includes(key)) {
+                        customResponses[key] = value;
+                    }
+                }
+                localStorage.setItem('customResponses', JSON.stringify(customResponses));
+            }
+            
+            loadCustomResponses() {
+                const savedResponses = localStorage.getItem('customResponses');
+                if (savedResponses) {
+                    const customResponses = JSON.parse(savedResponses);
+                    for (const [key, value] of Object.entries(customResponses)) {
+                        this.responses[key] = value;
+                    }
+                }
+            }
+            
+            learn(question, answer) {
+                this.responses[question.toLowerCase()] = answer;
+                this.saveCustomResponses();
+            }
+            
+            getResponse(message) {
+                const lowerMsg = message.toLowerCase();
+                
+                // معالجة أمر التعلم
+                if (lowerMsg.startsWith('تعلم-')) {
+                    const parts = message.split('-').map(p => p.trim());
+                    if (parts.length >= 3) {
+                        const question = parts[1];
+                        const answer = parts.slice(2).join('-');
+                        this.learn(question, answer);
+                        return `تم تعليمي بنجاح! الآن عندما تقول "${question}" سأرد بـ "${answer}"`;
+                    }
+                    return 'استخدم الصيغة: تعلم-السؤال-الجواب';
+                }
+                
+                // البحث عن رد مطابق
+                for (const [question, response] of Object.entries(this.responses)) {
+                    if (lowerMsg.includes(question.toLowerCase())) {
+                        return typeof response === 'function' ? response() : response;
+                    }
+                }
+                
+                // إذا لم يتعرف على الرسالة
+                return 'لم أفهم سؤالك. يمكنك تعليمي بالصيغة: تعلم-السؤال-الجواب';
+            }
+        }
+
+        const chatbot = new SmartChatbot();
+        
+        window.onload = function() {
+            setTimeout(() => {
+                addMessage("مرحباً! أنا مساعدك الذكي. يمكنك تعليمي ردود جديدة باستخدام:\nتعلم-السؤال-الجواب", 'bot');
+            }, 800);
+        };
+
+        function sendMessage() {
+            const userInput = document.getElementById('userInput');
+            const messageText = userInput.value.trim();
+            if (!messageText) return;
+
+            addMessage(messageText, 'user');
+            userInput.value = '';
+            showTypingIndicator();
+            
+            setTimeout(() => {
+                hideTypingIndicator();
+                const response = chatbot.getResponse(messageText);
+                addMessage(response, 'bot');
+            }, 800 + Math.random() * 1000);
+        }
+
+        function addMessage(text, sender) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', sender);
+            messageDiv.textContent = text;
+            chatMessages.appendChild(messageDiv);
+            scrollToBottom();
+        }
+        
+        function scrollToBottom() {
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        function showTypingIndicator() {
+            const chatMessages = document.getElementById('chatMessages');
+            const typingDiv = document.createElement('div');
+            typingDiv.id = 'typingIndicator';
+            typingDiv.classList.add('message', 'bot');
+            typingDiv.innerHTML = '<div class="typing-indicator"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div>';
+            chatMessages.appendChild(typingDiv);
+            scrollToBottom();
+        }
+        
+        function hideTypingIndicator() {
+            const typingIndicator = document.getElementById('typingIndicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>

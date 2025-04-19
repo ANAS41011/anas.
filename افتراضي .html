@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agriculture Simulation</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Roboto', sans-serif;
+            background-color: #eef2f3;
+        }
+        #ui {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            color: white;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+            width: 300px;
+        }
+        #ui h2 {
+            margin-top: 0;
+            color: #00d084;
+        }
+        #ui select, #ui button {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            width: 100%;
+            font-size: 14px;
+        }
+        #ui button {
+            background: #00d084;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        #ui button:hover {
+            background: #009c64;
+        }
+        #results {
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            color: black;
+            border-radius: 5px;
+        }
+        #error {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 0, 0, 0.7);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            display: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div id="ui">
+        <h2>محاكاة الزراعة</h2>
+        <label for="crop">اختار المحصول:</label>
+        <select id="crop">
+            <option value="wheat">قمح</option>
+            <option value="corn">ذرة</option>
+            <option value="rice">أرز</option>
+        </select>
+        <br>
+        <label for="soil">نوع التربة:</label>
+        <select id="soil">
+            <option value="sandy">رملية</option>
+            <option value="clay">طينية</option>
+            <option value="loamy">طينية لومية</option>
+        </select>
+        <br>
+        <label for="irrigation">طريقة الري:</label>
+        <select id="irrigation">
+            <option value="drip">ري بالتنقيط</option>
+            <option value="sprinkler">ري بالرش</option>
+            <option value="flood">ري بالغمر</option>
+        </select>
+        <br>
+        <button id="simulate">محاكاة</button>
+        <div id="results"></div>
+    </div>
+    <div id="error">حدث خطأ. من فضلك تحقق من اتصالك بالإنترنت أو وحدة التحكم في المتصفح لمزيد من التفاصيل.</div>
+
+    <!-- إضافة مكتبات JavaScript الخاصة بثري.js و توين.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/TWEEN.min.js"></script>
+    <script>
+        try {
+            // إعداد المشهد (Scene)
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            // إضافة خلفية للمشهد (ضع رابط الصورة هنا)
+            const bgTexture = new THREE.TextureLoader().load(
+                'رابط_الصورة_الخلفية_هنا',  // ضع رابط الصورة هنا
+                () => console.log('تم تحميل الخلفية بنجاح!'),
+                undefined,
+                () => showError('فشل تحميل صورة الخلفية.')
+            );
+            scene.background = bgTexture;
+
+            // إضافة التربة (السطح)
+            const groundGeometry = new THREE.PlaneGeometry(50, 50);
+            const groundTexture = new THREE.TextureLoader().load(
+                'hph.jpg',  // ضع رابط صورة التربة هنا
+                () => console.log('تم تحميل صورة التربة بنجاح!'),
+                undefined,
+                () => showError('فشل تحميل صورة التربة.')
+            );
+            groundTexture.wrapS = groundTexture.wrapT = THREE.RepeatWrapping;
+            groundTexture.repeat.set(10, 10);
+            const groundMaterial = new THREE.MeshPhongMaterial({ map: groundTexture });
+            const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+            ground.rotation.x = -Math.PI / 2;
+            scene.add(ground);
+
+            // إضافة الإضاءة (ضوء الاتجاه + إضاءة محيطية)
+            const light = new THREE.DirectionalLight(0xffffff, 1.5);
+            light.position.set(10, 20, 10);
+            scene.add(light);
+            const ambientLight = new THREE.AmbientLight(0x404040, 0.7);
+            scene.add(ambientLight);
+
+            // مجموعة المحاصيل
+            const cropGroup = new THREE.Group();
+            scene.add(cropGroup);
+
+            // تحديد موقع الكاميرا
+            camera.position.set(0, 15, 30);
+            camera.lookAt(0, 0, 0);
+
+            // دالة لإضافة المحاصيل بناءً على نوع المحصول
+            function addCrops(type) {
+                cropGroup.clear(); // مسح المحاصيل القديمة
+                const cropTexture = new THREE.TextureLoader().load(
+                    type === "wheat" ? 'رابط_الصورة_للقمح_هنا' : // ضع رابط القمح هنا
+                    type === "corn" ? 'رابط_الصورة_للذرة_هنا' : // ضع رابط الذرة هنا
+                    'رابط_الصورة_للأرز_هنا',  // ضع رابط الأرز هنا
+                    () => console.log('تم تحميل صورة المحصول بنجاح!'),
+                    undefined,
+                    () => showError('فشل تحميل صورة المحصول.')
+                );
+                const cropMaterial = new THREE.MeshPhongMaterial({ map: cropTexture });
+                for (let i = -5; i <= 5; i++) {
+                    for (let j = -5; j <= 5; j++) {
+                        const cropGeometry = new THREE.BoxGeometry(0.5, 1, 0.5);
+                        const crop = new THREE.Mesh(cropGeometry, cropMaterial);
+                        crop.position.set(i, 0.5, j);
+                        crop.scale.set(1, 0.1, 1); // الحجم الأولي للمحصول
+                        cropGroup.add(crop);
+
+                        // انيميشين لنمو المحصول
+                        new TWEEN.Tween(crop.scale)
+                            .to({ y: 1 }, 2000) // النمو من 0.1 إلى 1
+                            .easing(TWEEN.Easing.Elastic.Out) // تأثير النمو
+                            .start();
+                    }
+                }
+            }
+
+            // حدث عند الضغط على زر "محاكاة"
+            document.getElementById("simulate").addEventListener("click", () => {
+                const crop = document.getElementById("crop").value;
+                const soil = document.getElementById("soil").value;
+                const irrigation = document.getElementById("irrigation").value;
+
+                addCrops(crop); // إضافة المحصول
+
+                const results = document.getElementById("results");
+                let resultText = `<p><strong>المحصول:</strong> ${crop}</p>`;
+                resultText += `<p><strong>نوع التربة:</strong> ${soil}</p>`;
+                resultText += `<p><strong>طريقة الري:</strong> ${irrigation}</p>`;
+                const soilRecommendations = {
+                    sandy: 'التربة الرملية تصرف الماء بسرعة وقد تحتاج إلى المزيد من الري.',
+                    clay: 'التربة الطينية تحتفظ بالماء ولكنها قد تتجمع بشكل مفرط.',
+                    loamy: 'التربة الطينية اللومية هي الأنسب لمعظم المحاصيل.'
+                };
+                const irrigationEfficiency = {
+                    drip: 'الري بالتنقيط يوفر الماء ويوجهه مباشرة إلى الجذور.',
+                    sprinkler: 'الري بالرش مرن ولكنه قد يهدر بعض الماء.',
+                    flood: 'الري بالغمر بسيط ولكن قد يؤدي إلى التشبع بالماء.'
+                };
+                resultText += `<p><strong>نصيحة للتربة:</strong> ${soilRecommendations[soil]}</p>`;
+                resultText += `<p><strong>كفاءة الري:</strong> ${irrigationEfficiency[irrigation]}</p>`;
+                results.innerHTML = resultText;
+            });
+
+            // دالة لتحديث الأنيميشن
+            function animate() {
+                requestAnimationFrame(animate);
+                TWEEN.update(); // تحديث التويين
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            // دالة لعرض الأخطاء
+            function showError(message) {
+                const errorDiv = document.getElementById("error");
+                errorDiv.textContent = message;
+                errorDiv.style.display = "block";
+                setTimeout(() => {
+                    errorDiv.style.display = "none";
+                }, 5000); // إخفاء الرسالة بعد 5 ثواني
+            }
+
+        } catch (error) {
+            console.error(error);
+            const errorDiv = document.getElementById("error");
+            errorDiv.textContent = "حدث خطأ غير متوقع: " + error.message;
+            errorDiv.style.display = "block";
+        }
+    </script>
+
+</body>
+</html>

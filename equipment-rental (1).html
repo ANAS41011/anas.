@@ -3,330 +3,2115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تأجير المعدات | منصة المزارعين</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <style> 
+    <title>تأجير المعدات الزراعية | منصة المزارعين</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --primary-dark: #1b5e20;
+            --primary-light: #81c784;
+            --secondary-color: #ff8f00;
+            --dark-color: #263238;
+            --light-color: #f5f5f5;
+            --danger-color: #d32f2f;
+            --warning-color: #ffa000;
+            --success-color: #388e3c;
+        }
+        
         body {
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Tajawal', sans-serif;
             background-color: #f9f9f9;
             margin: 0;
             padding: 0;
-        }
-        .header {
-            background-color: #28a745;
-            padding: 20px 0;
-            color: white;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .logo {
-            font-size: 30px;
-            font-weight: bold;
-        }
-        .product-card {
-            background-color: #fff;
-            margin: 15px;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out;
-        }
-        .product-card:hover {
-            transform: translateY(-10px);
-        }
-        .product-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
-        }
-        .product-card h5 {
-            margin-top: 15px;
-            font-size: 20px;
             color: #333;
         }
-        .product-card p {
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            padding: 15px 0;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-left: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            padding: 8px 15px;
+            margin: 0 5px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .navbar-nav .nav-link.active {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .search-bar {
+            position: relative;
+            margin: 0 15px;
+        }
+        
+        .search-bar input {
+            width: 300px;
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .search-bar input:focus {
+            width: 350px;
+            outline: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .search-bar button {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            color: var(--primary-color);
+        }
+        
+        .user-actions a {
+            color: white;
+            margin: 0 10px;
             font-size: 18px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .user-actions a:hover {
+            color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        .user-actions .badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            font-size: 10px;
+            background-color: var(--danger-color);
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_CzwoLskcEuyfPv39Ey1A4lBYpFGd8QjMqQ&s');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .hero-content h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-content p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .btn-hero {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 700;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-hero:hover {
+            background-color: #ff6f00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--dark-color);
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .equipment-card {
+            background-color: #fff;
+            margin-bottom: 25px;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .equipment-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .equipment-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--danger-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            z-index: 1;
+        }
+        
+        .equipment-favorite {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: rgba(255, 255, 255, 0.8);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--danger-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+        
+        .equipment-favorite:hover {
+            background-color: var(--danger-color);
+            color: white;
+        }
+        
+        .equipment-img-container {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .equipment-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .equipment-card:hover .equipment-img {
+            transform: scale(1.1);
+        }
+        
+        .equipment-info {
+            padding: 20px;
+        }
+        
+        .equipment-category {
+            color: var(--primary-color);
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .equipment-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+        
+        .equipment-specs {
+            margin-bottom: 15px;
+        }
+        
+        .spec-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            font-size: 14px;
             color: #555;
         }
-        .btn-buy {
-            background-color: #28a745;
+        
+        .spec-item i {
+            margin-left: 8px;
+            color: var(--primary-color);
+            font-size: 16px;
+        }
+        
+        .equipment-price {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .current-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+        
+        .old-price {
+            font-size: 16px;
+            color: #999;
+            text-decoration: line-through;
+            margin-right: 10px;
+        }
+        
+        .price-period {
+            font-size: 14px;
+            color: #777;
+            margin-right: 10px;
+        }
+        
+        .discount {
+            background-color: var(--danger-color);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-right: 10px;
+        }
+        
+        .rental-period {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            padding: 5px;
+        }
+        
+        .rental-period button {
+            background-color: var(--primary-light);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .rental-period button:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .rental-period span {
+            font-size: 16px;
+            font-weight: 700;
+        }
+        
+        .btn-rent {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-rent i {
+            margin-left: 8px;
+        }
+        
+        .btn-rent:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .categories-section {
+            margin: 50px 0;
+        }
+        
+        .category-card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            height: 100%;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+        
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            color: var(--primary-dark);
+            font-size: 30px;
+        }
+        
+        .category-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+        
+        .category-count {
+            color: #777;
+            font-size: 14px;
+        }
+        
+        .features-section {
+            background-color: var(--light-color);
+            padding: 60px 0;
+            margin: 50px 0;
+        }
+        
+        .feature-box {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .feature-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+        
+        .feature-desc {
+            color: #666;
+            font-size: 15px;
+        }
+        
+        .testimonials-section {
+            padding: 60px 0;
+            background-color: white;
+        }
+        
+        .testimonial-card {
+            background-color: var(--light-color);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 60px;
+            color: var(--primary-light);
+            font-family: serif;
+            line-height: 1;
+        }
+        
+        .testimonial-text {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-left: 15px;
+        }
+        
+        .author-info h5 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--dark-color);
+        }
+        
+        .author-info p {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 0;
+        }
+        
+        .footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 0;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        
+        .footer-about p {
+            color: #bbb;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #bbb;
+            transition: all 0.3s ease;
+            display: block;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-right: 5px;
+        }
+        
+        .footer-contact li {
+            margin-bottom: 15px;
+            color: #bbb;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .footer-contact i {
+            margin-left: 10px;
+            color: var(--primary-color);
+            font-size: 18px;
+            margin-top: 3px;
+        }
+        
+        .footer-newsletter p {
+            color: #bbb;
+            margin-bottom: 20px;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .newsletter-form input::placeholder {
+            color: #ddd;
+        }
+        
+        .newsletter-form button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 30px 30px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .newsletter-form button:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .footer-bottom {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 20px 0;
+            margin-top: 40px;
+            text-align: center;
+            color: #bbb;
+            font-size: 14px;
+        }
+        
+        .payment-methods img {
+            height: 30px;
+            margin-left: 10px;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-methods img:hover {
+            filter: grayscale(0);
+            opacity: 1;
+        }
+        
+        /* Modal Styles */
+        .modal-header {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .modal-title {
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+        
+        .modal-body {
+            padding: 20px;
+        }
+        
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-left: 15px;
+        }
+        
+        .cart-item-info {
+            flex: 1;
+        }
+        
+        .cart-item-title {
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--dark-color);
+        }
+        
+        .cart-item-price {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        
+        .cart-item-period {
+            font-size: 14px;
+            color: #777;
+        }
+        
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+        }
+        
+        .cart-item-quantity button {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-color: var(--light-color);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .cart-item-quantity span {
+            margin: 0 10px;
+            font-weight: 700;
+        }
+        
+        .cart-item-remove {
+            color: var(--danger-color);
+            cursor: pointer;
+            font-size: 18px;
+            margin-right: 15px;
+        }
+        
+        .cart-summary {
+            padding: 20px;
+            background-color: var(--light-color);
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .cart-summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .cart-summary-total {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+        
+        .btn-checkout {
+            background-color: var(--primary-color);
             color: white;
             border: none;
             padding: 12px;
+            border-radius: 30px;
+            font-weight: 700;
             width: 100%;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-checkout:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Payment Methods */
+        .payment-method {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
             cursor: pointer;
-            font-size: 16px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
         }
-        .btn-buy:hover {
-            background-color: #218838;
+        
+        .payment-method:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
-        .footer {
-            background-color: #343a40;
-            color: white;
-            padding: 20px 0;
+        
+        .payment-method.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(46, 125, 50, 0.05);
+        }
+        
+        .payment-method-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .payment-method-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--light-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            color: var(--primary-color);
+            font-size: 18px;
+        }
+        
+        .payment-method-title {
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+        
+        .payment-method-desc {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* Rental Calendar */
+        .rental-calendar {
+            margin: 20px 0;
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .calendar-title {
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+        
+        .calendar-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .calendar-nav button {
+            background-color: var(--light-color);
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+        
+        .calendar-day-header {
             text-align: center;
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--dark-color);
+            padding: 5px;
         }
-        .product-card .btn-buy i {
-            margin-left: 8px;
+        
+        .calendar-day {
+            text-align: center;
+            padding: 10px 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .calendar-day:hover {
+            background-color: var(--light-color);
+        }
+        
+        .calendar-day.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .calendar-day.disabled {
+            color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 991.98px) {
+            .hero-content h1 {
+                font-size: 36px;
+            }
+            
+            .hero-content p {
+                font-size: 18px;
+            }
+            
+            .search-bar input {
+                width: 100%;
+            }
+            
+            .search-bar input:focus {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 767.98px) {
+            .header {
+                padding: 10px 0;
+            }
+            
+            .logo {
+                font-size: 22px;
+            }
+            
+            .hero-section {
+                height: 300px;
+            }
+            
+            .hero-content h1 {
+                font-size: 28px;
+            }
+            
+            .hero-content p {
+                font-size: 16px;
+            }
+            
+            .section-title h2 {
+                font-size: 26px;
+            }
+            
+            .equipment-title {
+                font-size: 16px;
+            }
+            
+            .current-price {
+                font-size: 18px;
+            }
+            
+            .footer-title {
+                font-size: 18px;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+        
+        /* Floating Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* Pulse Animation */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
         }
     </style>
 </head>
 <body>
-
-    <!-- شريط التنقل (Navbar) -->
-    <!DOCTYPE html>
-    <html lang="ar" dir="rtl">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>دليل الأسعار | منصة المزارعين</title>
-        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-        <style>
-            /* تنسيق عام */
-            body {
-                font-family: 'Cairo', sans-serif;
-                background-color: #f4f4f9;
-                margin: 0;
-                padding: 0;
-            }
-    
-            /* الهيدر */
-            .header {
-                background-color: #1d6f3f; /* أخضر داكن */
-                padding: 20px 0;
-                color: white;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-                border-bottom: 3px solid #ffc107; /* خط أصفر عند الهيدر */
-            }
-    
-            /* الشعار */
-            .logo {
-                font-size: 36px;
-                font-weight: bold;
-                letter-spacing: 2px;
-            }
-    
-            /* شريط التنقل */
-            .navbar-nav .nav-link {
-                color: white !important;
-                font-weight: bold;
-                padding: 12px 20px;
-            }
-    
-            .navbar-nav .nav-link:hover {
-                color: #ffc107 !important;
-                background-color: rgba(255, 193, 7, 0.2);
-                border-radius: 5px;
-            }
-    
-            /* التنقل المتجاوب */
-            @media (max-width: 767px) {
-                .navbar-nav {
-                    text-align: center;
-                }
-            }
-    
-            /* تحسين التباعد في الأقسام */
-            .container {
-                padding: 20px;
-            }
-        </style>
-    </head>
-    <body>
-    
-        <!-- الهيدر -->
-        <header class="header sticky-top">
-            <div class="container">
-                <!-- الشعار -->
-                <div class="logo">🌾 نبض الزراعة</div>
-                <!-- شريط التنقل -->
-                <nav class="navbar navbar-expand-lg navbar-light">
-                    <a class="navbar-brand" href="index.html">الرئيسية</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="about-1.html">من نحن</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="services (1).html">الخدمات</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="Contact (1).html">تواصل معنا</a>
-                            </li>
-                        </ul>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="logo">
+                        <i class="fas fa-tractor"></i>
+                        سوق المعدات الزراعية
                     </div>
-                </nav>
-            </div>
-        </header>
-    
-        <!-- إضافة جافا سكريبت لتفعيل زر التبديل -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-    
-    </body>
-    </html>
-    
-    
-    <!-- محتوى السوق -->
-    <section class="container text-center">
-        <h2>السوق الإلكتروني</h2> تأجير المعدات</p>
-
-        <!-- عرض المنتجات -->
-        <div class="row">
-            <!-- منتج 1 (جرار) -->
-            <div class="col-md-3">
-                <div class="product-card">
-                    <img src="Ha8d80ab59b91484cb8a759cd9dc800638.jpg_720x720q50.avif" alt="جرار">
-                    <h5>جرار زراعي</h5>
-                    <p>سعر: 3000 جنيه</p>
-                    <button class="btn-buy" onclick="addToCart('جرار زراعي', 3000)"><i class="fas fa-cart-plus"></i> إضافة إلى السلة</button>
                 </div>
-            </div>
-
-            <!-- منتج 2 (معدات ري) -->
-            <div class="col-md-3">
-                <div class="product-card">
-                    <img src="896c3187d91f4a7bb849818d13.jpg@watermark=2&text=YXIuaHQtYmF1ZXIuY29t&t=75&color=I0ZGRkZGRg==&s=20&size=33&p=9_95Q.webp" alt="معدات ري">
-                    <h5>معدات ري</h5>
-                    <p>سعر: 2500 جنيه</p>
-                    <button class="btn-buy" onclick="addToCart('معدات ري', 2500)"><i class="fas fa-cart-plus"></i> إضافة إلى السلة</button>
+                <div class="col-lg-6 col-md-8 d-none d-md-block">
+                    <div class="search-bar">
+                        <input type="text" placeholder="ابحث عن معدات زراعية...">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </div>
                 </div>
-            </div>
-
-            <!-- منتج 3 (حصادة) -->
-            <div class="col-md-3">
-                <div class="product-card">
-                    <img src="حصد.jpg" alt="حصادة">
-                    <h5>حصادة</h5>
-                    <p>سعر: 8000 جنيه</p>
-                    <button class="btn-buy" onclick="addToCart('حصادة', 8000)"><i class="fas fa-cart-plus"></i> إضافة إلى السلة</button>
-                </div>
-            </div>
-
-            <!-- منتج 4 (مقعد قيادة) -->
-            <div class="col-md-3">
-                <div class="product-card">
-                    <img src=".jpg" alt="مقعد قيادة">
-                    <h5>مقعد قيادة</h5>
-                    <p>سعر: 1000 جنيه</p>
-                    <button class="btn-buy" onclick="addToCart('مقعد قيادة', 1000)"><i class="fas fa-cart-plus"></i> إضافة إلى السلة</button>
-                </div>
-            </div>
-
-            <!-- منتج 5 (آلة حصاد) -->
-            <div class="col-md-3">
-                <div class="product-card">
-                    <img src="images.jpg" alt="االة حصاد  ">
-                    <h5>آلة حصاد</h5>
-                    <p>سعر: 6000 جنيه</p>
-                    <button class="btn-buy" onclick="addToCart('آلة حصاد', 6000)"><i class="fas fa-cart-plus"></i> إضافة إلى السلة</button>
-                </div>
-            </div>
-
-            <!-- منتج 6 (نظام ري بالتنقيط) -->
-            <div class="col-md-3">
-                <div class="product-card">
-                    <img src="e5d0e02537579c0ed4d4bab210.jpg@4e_360w_360h.src_95Q.webp" alt="نظام ري بالتنقيط">
-                    <h5>نظام ري بالتنقيط</h5>
-                    <p>سعر: 1500 جنيه</p>
-                    <button class="btn-buy" onclick="addToCart('نظام ري بالتنقيط', 1500)"><i class="fas fa-cart-plus"></i> إضافة إلى السلة</button>
-                </div>
-            </div>
-
-            <!-- منتج 7 (محطة طاقة شمسية) -->
-            <div class="col-md-3">
-                <div class="product-card">
-                    <img src="250-watt-24v-pv-solar-panels053dea39-10ed-4259-8ba0-c33e2f714c8b.webp" alt="محطة طاقة شمسية">
-                    <h5>محطة طاقة شمسية</h5>
-                    <p>سعر: 9000 جنيه</p>
-                    <button class="btn-buy" onclick="addToCart('محطة طاقة شمسية', 9000)"><i class="fas fa-cart-plus"></i> إضافة إلى السلة</button>
-                </div>
-            </div>
-
-            <!-- منتج 8 (معدات زراعية متنوعة) -->
-            <div class="col-md-3">
-                <div class="product-card">
-                    <img src="1715680382410.jpg" alt="معدات زراعية">
-                    <h5>معدات زراعية متنوعة</h5>
-                    <p>سعر: 5000 جنيه</p>
-                    <button class="btn-buy" onclick="addToCart('معدات زراعية متنوعة', 5000)"><i class="fas fa-cart-plus"></i> إضافة إلى السلة</button>
+                <div class="col-lg-3 col-md-12 col-6">
+                    <div class="user-actions text-start">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+                            <i class="fas fa-user"></i>
+                        </a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#wishlistModal">
+                            <i class="fas fa-heart"></i>
+                            <span class="badge">3</span>
+                        </a>
+                        <a href="#" onclick="showCart()">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="badge cart-count">0</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
+    </header>
 
-        <!-- زر شراء السلة -->
-        <div class="mt-4">
-            <button class="btn btn-primary" onclick="showPaymentMethods()">الدفع</button>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">الرئيسية</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">الجرارات</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">معدات الري</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">حصادات</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">معدات الحراثة</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">عروض خاصة</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">المزودون</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="fade-in">أفضل المعدات الزراعية للتأجير</h1>
+                <p class="fade-in delay-1">احصل على أحدث المعدات الزراعية بأفضل الأسعار وبدون متاعب الملكية</p>
+                <button class="btn btn-hero fade-in delay-2">استعرض المعدات <i class="fas fa-arrow-left ms-2"></i></button>
+            </div>
         </div>
     </section>
 
-    <!-- نافذة طرق الدفع (Modal) -->
-    <div class="modal fade" id="paymentMethodsModal" tabindex="-1" aria-labelledby="paymentMethodsModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <!-- Featured Equipment -->
+    <section class="container mb-5">
+        <div class="section-title fade-in">
+            <h2>معدات مميزة للتأجير</h2>
+        </div>
+        
+        <div class="row">
+            <!-- Equipment 1 (Tractor) -->
+            <div class="col-lg-3 col-md-6 fade-in delay-1">
+                <div class="equipment-card">
+                    <span class="equipment-badge">جديد</span>
+                    <div class="equipment-favorite">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="equipment-img-container">
+                        <img src="Ha8d80ab59b91484cb8a759cd9dc800638.jpg_720x720q50.avif" class="equipment-img" alt="جرار زراعي">
+                    </div>
+                    <div class="equipment-info">
+                        <span class="equipment-category">جرارات</span>
+                        <h3 class="equipment-title">جرار زراعي 120 حصان</h3>
+                        <div class="equipment-specs">
+                            <div class="spec-item">
+                                <i class="fas fa-horse-head"></i>
+                                <span>120 حصان</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-gas-pump"></i>
+                                <span>ديزل</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>موديل 2022</span>
+                            </div>
+                        </div>
+                        <div class="equipment-price">
+                            <span class="current-price">3000 جنيه</span>
+                            <span class="price-period">/يوم</span>
+                            <span class="old-price">3500 جنيه</span>
+                            <span class="discount">14%</span>
+                        </div>
+                        <div class="rental-period">
+                            <button onclick="updateRentalPeriod('جرار زراعي 120 حصان', -1)">-</button>
+                            <span id="period-جرار زراعي 120 حصان">1</span>
+                            <button onclick="updateRentalPeriod('جرار زراعي 120 حصان', 1)">+</button>
+                        </div>
+                        <button class="btn-rent" onclick="addToCart('جرار زراعي 120 حصان', 3000, 'https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80', 'يوم')">
+                            <i class="fas fa-cart-plus"></i> أجر الآن
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Equipment 2 (Irrigation) -->
+            <div class="col-lg-3 col-md-6 fade-in delay-2">
+                <div class="equipment-card">
+                    <span class="equipment-badge" style="background-color: var(--warning-color);">الأكثر طلباً</span>
+                    <div class="equipment-favorite">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="equipment-img-container">
+                        <img src="896c3187d91f4a7bb849818d13.jpg@watermark=2&text=YXIuaHQtYmF1ZXIuY29t&t=75&color=I0ZGRkZGRg==&s=20&size=33&p=9_95Q.webp"equipment-img" alt="نظام ري">
+                    </div>
+                    <div class="equipment-info">
+                        <span class="equipment-category">معدات الري</span>
+                        <h3 class="equipment-title">نظام ري بالتنقيط متكامل</h3>
+                        <div class="equipment-specs">
+                            <div class="spec-item">
+                                <i class="fas fa-ruler-combined"></i>
+                                <span>لـ 5 أفدنة</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-tint"></i>
+                                <span>ضغط 2 بار</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-clock"></i>
+                                <span>تركيب سريع</span>
+                            </div>
+                        </div>
+                        <div class="equipment-price">
+                            <span class="current-price">2500 جنيه</span>
+                            <span class="price-period">/أسبوع</span>
+                            <span class="old-price">3000 جنيه</span>
+                            <span class="discount">17%</span>
+                        </div>
+                        <div class="rental-period">
+                            <button onclick="updateRentalPeriod('نظام ري بالتنقيط متكامل', -1)">-</button>
+                            <span id="period-نظام ري بالتنقيط متكامل">1</span>
+                            <button onclick="updateRentalPeriod('نظام ري بالتنقيط متكامل', 1)">+</button>
+                        </div>
+                        <button class="btn-rent" onclick="addToCart('نظام ري بالتنقيط متكامل', 2500, 'https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80', 'أسبوع')">
+                            <i class="fas fa-cart-plus"></i> أجر الآن
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Equipment 3 (Harvester) -->
+            <div class="col-lg-3 col-md-6 fade-in delay-3">
+                <div class="equipment-card">
+                    <div class="equipment-favorite">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="equipment-img-container">
+                        <img src="data:image/jpeg;base64,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" class="equipment-img" alt="حصادة">
+                    </div>
+                    <div class="equipment-info">
+                        <span class="equipment-category">حصادات</span>
+                        <h3 class="equipment-title">حصادة قمح حديثة</h3>
+                        <div class="equipment-specs">
+                            <div class="spec-item">
+                                <i class="fas fa-horse-head"></i>
+                                <span>150 حصان</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>إنتاجية 5 أفدنة/يوم</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>موديل 2021</span>
+                            </div>
+                        </div>
+                        <div class="equipment-price">
+                            <span class="current-price">8000 جنيه</span>
+                            <span class="price-period">/يوم</span>
+                        </div>
+                        <div class="rental-period">
+                            <button onclick="updateRentalPeriod('حصادة قمح حديثة', -1)">-</button>
+                            <span id="period-حصادة قمح حديثة">1</span>
+                            <button onclick="updateRentalPeriod('حصادة قمح حديثة', 1)">+</button>
+                        </div>
+                        <button class="btn-rent" onclick="addToCart('حصادة قمح حديثة', 8000, 'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80', 'يوم')">
+                            <i class="fas fa-cart-plus"></i> أجر الآن
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Equipment 4 (Solar) -->
+            <div class="col-lg-3 col-md-6 fade-in delay-4">
+                <div class="equipment-card">
+                    <span class="equipment-badge" style="background-color: var(--danger-color);">محدود</span>
+                    <div class="equipment-favorite">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="equipment-img-container">
+                        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="equipment-img" alt="طاقة شمسية">
+                    </div>
+                    <div class="equipment-info">
+                        <span class="equipment-category">طاقة شمسية</span>
+                        <h3 class="equipment-title">محطة طاقة شمسية 5 كيلووات</h3>
+                        <div class="equipment-specs">
+                            <div class="spec-item">
+                                <i class="fas fa-bolt"></i>
+                                <span>5 كيلووات/ساعة</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-solar-panel"></i>
+                                <span>16 لوح شمسي</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-battery-full"></i>
+                                <span>بطاريات تخزين</span>
+                            </div>
+                        </div>
+                        <div class="equipment-price">
+                            <span class="current-price">9000 جنيه</span>
+                            <span class="price-period">/شهر</span>
+                            <span class="old-price">12000 جنيه</span>
+                            <span class="discount">25%</span>
+                        </div>
+                        <div class="rental-period">
+                            <button onclick="updateRentalPeriod('محطة طاقة شمسية 5 كيلووات', -1)">-</button>
+                            <span id="period-محطة طاقة شمسية 5 كيلووات">1</span>
+                            <button onclick="updateRentalPeriod('محطة طاقة شمسية 5 كيلووات', 1)">+</button>
+                        </div>
+                        <button class="btn-rent" onclick="addToCart('محطة طاقة شمسية 5 كيلووات', 9000, 'https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80', 'شهر')">
+                            <i class="fas fa-cart-plus"></i> أجر الآن
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            <button class="btn btn-outline-primary">عرض المزيد <i class="fas fa-arrow-left ms-2"></i></button>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>تصفح حسب التصنيف</h2>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-3 col-md-6 fade-in delay-1">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-tractor"></i>
+                        </div>
+                        <h4 class="category-title">الجرارات</h4>
+                        <p class="category-count">24 معدة</p>
+                        <button class="btn btn-sm btn-outline-primary mt-2">تصفح الآن</button>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 fade-in delay-2">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <h4 class="category-title">معدات الري</h4>
+                        <p class="category-count">18 معدة</p>
+                        <button class="btn btn-sm btn-outline-primary mt-2">تصفح الآن</button>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 fade-in delay-3">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-haykal"></i>
+                        </div>
+                        <h4 class="category-title">حصادات</h4>
+                        <p class="category-count">12 معدة</p>
+                        <button class="btn btn-sm btn-outline-primary mt-2">تصفح الآن</button>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 fade-in delay-4">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-solar-panel"></i>
+                        </div>
+                        <h4 class="category-title">الطاقة الشمسية</h4>
+                        <p class="category-count">8 معدات</p>
+                        <button class="btn btn-sm btn-outline-primary mt-2">تصفح الآن</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>لماذا تختارنا؟</h2>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-3 col-md-6 fade-in delay-1">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h4 class="feature-title">أحدث المعدات</h4>
+                        <p class="feature-desc">جميع معداتنا حديثة وصيانتها دورية لضمان أفضل أداء</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 fade-in delay-2">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <h4 class="feature-title">توصيل سريع</h4>
+                        <p class="feature-desc">نوصل المعدات خلال 24 ساعة لأي مكان في مصر</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 fade-in delay-3">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </div>
+                        <h4 class="feature-title">أسعار تنافسية</h4>
+                        <p class="feature-desc">أفضل الأسعار مع خصومات للفترات الطويلة</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 fade-in delay-4">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h4 class="feature-title">دعم فني 24/7</h4>
+                        <p class="feature-desc">فريق دعم فني متاح على مدار الساعة لمساعدتك</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>آراء عملائنا</h2>
+            </div>
+            
+            <div class="swiper testimonials-slider fade-in delay-1">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="testimonial-card">
+                            <p class="testimonial-text">أشكر سوق المعدات الزراعية على جودة المعدات وسرعة التوصيل. الجرار الذي استأجرته كان بحالة ممتازة وساعدني في إنجاز العمل بسرعة.</p>
+                            <div class="testimonial-author">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="author-img" alt="أحمد محمد">
+                                <div class="author-info">
+                                    <h5>أحمد محمد</h5>
+                                    <p>مزارع - الدقهلية</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="swiper-slide">
+                        <div class="testimonial-card">
+                            <p class="testimonial-text">نظام الري الذي استأجرته من المنصة كان حلماً! وفر لي الوقت والماء وزاد من إنتاجية مزرعتي. شكراً لفريق الدعم الفني الرائع.</p>
+                            <div class="testimonial-author">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="author-img" alt="سارة أحمد">
+                                <div class="author-info">
+                                    <h5>سارة أحمد</h5>
+                                    <p>مالكة مزرعة - الفيوم</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="swiper-slide">
+                        <div class="testimonial-card">
+                            <p class="testimonial-text">أفضل مكان لتأجير المعدات الزراعية. الأسعار معقولة والجودة ممتازة. أنصح جميع المزارعين بالتجربة.</p>
+                            <div class="testimonial-author">
+                                <img src="https://randomuser.me/api/portraits/men/75.jpg" class="author-img" alt="محمود علي">
+                                <div class="author-info">
+                                    <h5>محمود علي</h5>
+                                    <p>مهندس زراعي - البحيرة</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="container my-5">
+        <div class="section-title fade-in">
+            <h2>كيف تعمل المنصة؟</h2>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4 fade-in delay-1">
+                <div class="feature-box text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h4 class="feature-title">1. ابحث عن المعدات</h4>
+                    <p class="feature-desc">تصفح مجموعتنا الواسعة من المعدات الزراعية واختر ما يناسب احتياجاتك</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4 fade-in delay-2">
+                <div class="feature-box text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h4 class="feature-title">2. حدد فترة التأجير</h4>
+                    <p class="feature-desc">اختر الفترة الزمنية التي تحتاجها المعدة مع إمكانية التمديد لاحقاً</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4 fade-in delay-3">
+                <div class="feature-box text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-truck-loading"></i>
+                    </div>
+                    <h4 class="feature-title">3. استلم المعدات</h4>
+                    <p class="feature-desc">نوصل المعدات لك في الموعد المحدد مع فريق تركيب ودعم فني إذا لزم الأمر</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="container my-5">
+        <div class="row align-items-center">
+            <div class="col-md-6 fade-in">
+                <img src="data:image/jpeg;base64,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" class="img-fluid rounded" alt="معدات زراعية">
+            </div>
+            <div class="col-md-6 fade-in delay-1">
+                <h2 class="mb-4">اشترك في نشرتنا البريدية</h2>
+                <p class="mb-4">اشترك الآن واحصل على آخر العروض والتخفيضات على تأجير المعدات مباشرة إلى بريدك الإلكتروني</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="بريدك الإلكتروني">
+                    <button type="submit">اشترك</button>
+                </div>
+                <p class="text-muted">نعد بعدم مشاركة بريدك مع أي طرف ثالث</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0 fade-in">
+                    <div class="footer-about">
+                        <div class="footer-logo">
+                            <i class="fas fa-leaf me-2"></i>سوق المزارعين
+                        </div>
+                        <p>منصة رائدة في بيع المنتجات الزراعية الطازجة مباشرة من المزارع إلى منزلك بجودة عالية وأسعار تنافسية.</p>
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/profile.php?id=100082692758834&locale=ar_AR"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0 fade-in delay-1">
+                    <h4 class="footer-title">روابط سريعة</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="about-1.html">من نحن</a></li>
+                        <li><a href="online-market (1).html">المنتجات</a></li>
+                        <li><a href="#">المزارع</a></li>
+                        <li><a href="online-market (1).html">العروض</a></li>
+                        <li><a href="equipment-rental (1).html">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0 fade-in delay-2">
+                    <h4 class="footer-title">خدمة العملاء</h4>
+                    <ul class="footer-links">
+                        <li><a href="login.html">حسابي</a></li>
+                        <li><a href="#">تتبع الطلب</a></li>
+                        <li><a href="#">الأسئلة الشائعة</a></li>
+                        <li><a href="#">سياسة الإرجاع</a></li>
+                        <li><a href="#">شروط الاستخدام</a></li>
+                        <li><a href="#">سياسة الخصوصية</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0 fade-in delay-3">
+                    <h4 class="footer-title">اتصل بنا</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>37 شارع محمود سلامه الاسكندريه</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>01276351643</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@souqalmozareen.com</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>الأحد - الخميس: 8 ص - 8 م</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        <p>© 2024 سوق المزارعين. جميع الحقوق محفوظة.</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="payment-methods">
+                            <img src="https://via.placeholder.com/40x25?text=Visa" alt="فيزا">
+                            <img src="https://via.placeholder.com/40x25?text=Mastercard" alt="ماستركارد">
+                            <img src="https://via.placeholder.com/40x25?text=Meeza" alt="ميزا">
+                            <img src="https://via.placeholder.com/40x25?text=Fawry" alt="فوري">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="paymentMethodsModalLabel">اختار طريقة الدفع</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h5 class="modal-title" id="cartModalLabel">سلة التأجير</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <button class="btn btn-success w-100" onclick="selectPaymentMethod('بطاقة ائتمانية')">بطاقة ائتمانية</button>
-                    <button class="btn btn-warning w-100 mt-2" onclick="selectPaymentMethod('دفع عند الاستلام')">دفع عند الاستلام</button>
-                    <button class="btn btn-info w-100 mt-2" onclick="selectPaymentMethod('باي بال')">باي بال</button>
+                    <div id="cartItemsContainer">
+                        <!-- Cart items will be dynamically added here -->
+                    </div>
+                    
+                    <div class="cart-summary">
+                        <div class="cart-summary-row">
+                            <span>المجموع الفرعي</span>
+                            <span id="cartSubtotal">0 جنيه</span>
+                        </div>
+                        <div class="cart-summary-row">
+                            <span>تكلفة التوصيل</span>
+                            <span id="cartShipping">500 جنيه</span>
+                        </div>
+                        <div class="cart-summary-row">
+                            <span>الخصم</span>
+                            <span id="cartDiscount">0 جنيه</span>
+                        </div>
+                        <div class="cart-summary-row cart-summary-total">
+                            <span>الإجمالي</span>
+                            <span id="cartTotal">500 جنيه</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-checkout" onclick="proceedToCheckout()">
+                        <i class="fas fa-shopping-bag me-2"></i> إتمام الحجز
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- الفوتر -->
-    <footer class="footer">
-        <p>© 2024 منصة المزارعين. جميع الحقوق محفوظة.</p>
-    </footer>
+    <!-- Payment Methods Modal -->
+    <div class="modal fade" id="paymentMethodsModal" tabindex="-1" aria-labelledby="paymentMethodsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="paymentMethodsModalLabel">إتمام الطلب</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="checkout-summary mb-4">
+                                <h4 class="mb-3">ملخص الطلب</h4>
+                                <div id="checkoutSummaryItems">
+                                    <!-- Order summary items will be dynamically added here -->
+                                </div>
+                                <div class="cart-summary-row">
+                                    <span>المجموع الفرعي</span>
+                                    <span id="checkoutSubtotal">0 جنيه</span>
+                                </div>
+                                <div class="cart-summary-row">
+                                    <span>تكلفة التوصيل</span>
+                                    <span id="checkoutShipping">500 جنيه</span>
+                                </div>
+                                <div class="cart-summary-row">
+                                    <span>الخصم</span>
+                                    <span id="checkoutDiscount">0 جنيه</span>
+                                </div>
+                                <div class="cart-summary-row cart-summary-total">
+                                    <span>الإجمالي</span>
+                                    <span id="checkoutTotal">500 جنيه</span>
+                                </div>
+                            </div>
+                            
+                            <div class="delivery-address mb-4">
+                                <h4 class="mb-3">عنوان التوصيل</h4>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="deliveryAddress" id="homeAddress" checked>
+                                    <label class="form-check-label" for="homeAddress">
+                                        <strong>المنزل:</strong>37 شارع محمود سلامه الاسكندريه
+                                    </label>
+                                </div>
+                                <div class="form-check mt-2">
+                                    <input class="form-check-input" type="radio" name="deliveryAddress" id="workAddress">
+                                    <label class="form-check-label" for="workAddress">
+                                        <strong>العمل:</strong> 456 شارع المدينة المنورة، الجيزة، مصر
+                                    </label>
+                                </div>
+                                <button class="btn btn-sm btn-outline-primary mt-2">إضافة عنوان جديد</button>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <h4 class="mb-3">طريقة الدفع</h4>
+                            
+                            <div class="payment-method selected" onclick="selectPaymentMethod(this, 'بطاقة ائتمانية')">
+                                <div class="payment-method-header">
+                                    <div class="payment-method-icon">
+                                        <i class="far fa-credit-card"></i>
+                                    </div>
+                                    <h5 class="payment-method-title">بطاقة ائتمانية</h5>
+                                </div>
+                                <p class="payment-method-desc">ادخل بيانات بطاقتك الائتمانية لإتمام الدفع</p>
+                                
+                                <div class="card-details mt-3" id="creditCardDetails">
+                                    <div class="mb-3">
+                                        <label for="cardNumber" class="form-label">رقم البطاقة</label>
+                                        <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="cardExpiry" class="form-label">تاريخ الانتهاء</label>
+                                            <input type="text" class="form-control" id="cardExpiry" placeholder="MM/YY">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="cardCvv" class="form-label">CVV</label>
+                                            <input type="text" class="form-control" id="cardCvv" placeholder="123">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="cardName" class="form-label">اسم حامل البطاقة</label>
+                                        <input type="text" class="form-control" id="cardName" placeholder="كما هو مدون على البطاقة">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="payment-method" onclick="selectPaymentMethod(this, 'دفع عند الاستلام')">
+                                <div class="payment-method-header">
+                                    <div class="payment-method-icon">
+                                        <i class="fas fa-money-bill-wave"></i>
+                                    </div>
+                                    <h5 class="payment-method-title">دفع عند الاستلام</h5>
+                                </div>
+                                <p class="payment-method-desc">ادفع نقداً عند استلام المعدات</p>
+                            </div>
+                            
+                            <div class="payment-method" onclick="selectPaymentMethod(this, 'باي بال')">
+                                <div class="payment-method-header">
+                                    <div class="payment-method-icon">
+                                        <i class="fab fa-paypal"></i>
+                                    </div>
+                                    <h5 class="payment-method-title">باي بال</h5>
+                                </div>
+                                <p class="payment-method-desc">ادفع باستخدام حساب باي بال الخاص بك</p>
+                            </div>
+                            
+                            <button class="btn btn-checkout w-100 mt-4" onclick="completePayment()">
+                                <i class="fas fa-check-circle me-2"></i> تأكيد الطلب
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- جافا سكريبت -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">تسجيل الدخول</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">البريد الإلكتروني</label>
+                            <input type="email" class="form-control" id="loginEmail" placeholder="ادخل بريدك الإلكتروني">
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">كلمة المرور</label>
+                            <input type="password" class="form-control" id="loginPassword" placeholder="ادخل كلمة المرور">
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">تذكرني</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">تسجيل الدخول</button>
+                    </form>
+                    
+                    <div class="text-center mt-3">
+                        <a href="#" class="text-muted">نسيت كلمة المرور؟</a>
+                        <p class="mt-3">ليس لديك حساب؟ <a href="#" class="text-primary">سجل الآن</a></p>
+                    </div>
+                    
+                    <div class="social-login mt-4">
+                        <p class="text-center text-muted">أو سجل الدخول باستخدام</p>
+                        <div class="d-flex justify-content-center gap-3">
+                            <button class="btn btn-outline-primary">
+                                <i class="fab fa-facebook-f"></i> فيسبوك
+                            </button>
+                            <button class="btn btn-outline-danger">
+                                <i class="fab fa-google"></i> جوجل
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wishlist Modal -->
+    <div class="modal fade" id="wishlistModal" tabindex="-1" aria-labelledby="wishlistModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="wishlistModalLabel">قائمة الرغبات</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>الصورة</th>
+                                    <th>المعدة</th>
+                                    <th>السعر</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <img src="Ha8d80ab59b91484cb8a759cd9dc800638.jpg_720x720q50.avif" width="50" height="50" class="rounded" alt="جرار زراعي">
+                                    </td>
+                                    <td>جرار زراعي 120 حصان</td>
+                                    <td>3000 جنيه/يوم</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary me-2">أضف إلى السلة</button>
+                                        <button class="btn btn-sm btn-outline-danger"><i class="far fa-trash-alt"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <img src="e5d0e02537579c0ed4d4bab210.jpg@4e_360w_360h.src_95Q.webp" width="50" height="50" class="rounded" alt="نظام ري">
+                                    </td>
+                                    <td>نظام ري بالتنقيط متكامل</td>
+                                    <td>2500 جنيه/أسبوع</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary me-2">أضف إلى السلة</button>
+                                        <button class="btn btn-sm btn-outline-danger"><i class="far fa-trash-alt"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                    <button type="button" class="btn btn-primary">حفظ التغييرات</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Toast -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="successToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success text-white">
+                <strong class="me-auto">نجاح</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                تمت العملية بنجاح!
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script>
-        let cart = [];
+        // Initialize Swiper
+        const swiper = new Swiper('.testimonials-slider', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 2,
+                },
+                992: {
+                    slidesPerView: 3,
+                }
+            }
+        });
 
-        // إضافة منتج إلى السلة
-        function addToCart(productName, price) {
-            cart.push({ name: productName, price: price, quantity: 1 });
-            alert('تم إضافة ' + productName + ' إلى السلة');
+        // Equipment rental functionality
+        let cart = [];
+        let rentalPeriods = {};
+        let selectedPaymentMethod = 'بطاقة ائتمانية';
+
+        function updateRentalPeriod(equipmentName, change) {
+            if (!rentalPeriods[equipmentName]) {
+                rentalPeriods[equipmentName] = 1;
+            }
+            rentalPeriods[equipmentName] += change;
+            if (rentalPeriods[equipmentName] < 1) {
+                rentalPeriods[equipmentName] = 1;
+            }
+            document.getElementById(`period-${equipmentName}`).textContent = rentalPeriods[equipmentName];
         }
 
-        // عرض طرق الدفع
-        function showPaymentMethods() {
+        function addToCart(equipmentName, price, image, periodType) {
+            const period = rentalPeriods[equipmentName] || 1;
+            const existingItem = cart.find(item => item.name === equipmentName);
+            
+            if (existingItem) {
+                existingItem.period += period;
+            } else {
+                cart.push({ 
+                    name: equipmentName, 
+                    price: price, 
+                    period: period,
+                    periodType: periodType,
+                    image: image
+                });
+            }
+            
+            updateCartCount();
+            showToast(`تم إضافة ${equipmentName} لمدة ${period} ${periodType} إلى السلة`);
+        }
+
+        function updateCartCount() {
+            const count = cart.reduce((total, item) => total + item.period, 0);
+            document.querySelectorAll('.cart-count').forEach(el => {
+                el.textContent = count;
+            });
+        }
+
+        function showCart() {
+            const cartItemsContainer = document.getElementById('cartItemsContainer');
+            cartItemsContainer.innerHTML = '';
+            
             if (cart.length === 0) {
-                alert("السلة فارغة! يجب إضافة منتجات أولاً.");
+                cartItemsContainer.innerHTML = '<p class="text-center py-4">سلة التأجير فارغة</p>';
+                document.getElementById('cartSubtotal').textContent = '0 جنيه';
+                document.getElementById('cartTotal').textContent = '0 جنيه';
+            } else {
+                let subtotal = 0;
+                
+                cart.forEach(item => {
+                    let itemTotal;
+                    if (item.periodType === 'يوم') {
+                        itemTotal = item.price * item.period;
+                    } else if (item.periodType === 'أسبوع') {
+                        itemTotal = item.price * item.period;
+                    } else if (item.periodType === 'شهر') {
+                        itemTotal = item.price * item.period;
+                    }
+                    
+                    subtotal += itemTotal;
+                    
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item';
+                    cartItem.innerHTML = `
+                        <img src="${item.image}" class="cart-item-img" alt="${item.name}">
+                        <div class="cart-item-info">
+                            <h5 class="cart-item-title">${item.name}</h5>
+                            <div class="cart-item-price">${item.price} جنيه/${item.periodType}</div>
+                            <div class="cart-item-period">لمدة ${item.period} ${item.periodType}</div>
+                            <div class="cart-item-quantity">
+                                <button onclick="updateCartItemPeriod('${item.name}', -1)">-</button>
+                                <span>${item.period}</span>
+                                <button onclick="updateCartItemPeriod('${item.name}', 1)">+</button>
+                            </div>
+                        </div>
+                        <div class="cart-item-total">${itemTotal} جنيه</div>
+                        <i class="fas fa-times cart-item-remove" onclick="removeCartItem('${item.name}')"></i>
+                    `;
+                    cartItemsContainer.appendChild(cartItem);
+                });
+                
+                const shipping = 500;
+                const total = subtotal + shipping;
+                
+                document.getElementById('cartSubtotal').textContent = `${subtotal} جنيه`;
+                document.getElementById('cartShipping').textContent = `${shipping} جنيه`;
+                document.getElementById('cartTotal').textContent = `${total} جنيه`;
+            }
+            
+            const cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
+            cartModal.show();
+        }
+
+        function updateCartItemPeriod(equipmentName, change) {
+            const item = cart.find(item => item.name === equipmentName);
+            if (item) {
+                item.period += change;
+                
+                if (item.period < 1) {
+                    cart = cart.filter(item => item.name !== equipmentName);
+                }
+                
+                showCart();
+                updateCartCount();
+            }
+        }
+
+        function removeCartItem(equipmentName) {
+            cart = cart.filter(item => item.name !== equipmentName);
+            showCart();
+            updateCartCount();
+        }
+
+        function proceedToCheckout() {
+            const checkoutSummaryItems = document.getElementById('checkoutSummaryItems');
+            checkoutSummaryItems.innerHTML = '';
+            
+            if (cart.length === 0) {
+                showToast('سلة التأجير فارغة!');
                 return;
             }
-            // فتح نافذة طرق الدفع
-            $('#paymentMethodsModal').modal('show');
+            
+            let subtotal = 0;
+            
+            cart.forEach(item => {
+                let itemTotal;
+                if (item.periodType === 'يوم') {
+                    itemTotal = item.price * item.period;
+                } else if (item.periodType === 'أسبوع') {
+                    itemTotal = item.price * item.period;
+                } else if (item.periodType === 'شهر') {
+                    itemTotal = item.price * item.period;
+                }
+                
+                subtotal += itemTotal;
+                
+                const itemElement = document.createElement('div');
+                itemElement.className = 'mb-2';
+                itemElement.innerHTML = `
+                    <div class="d-flex justify-content-between">
+                        <span>${item.name} (${item.period} ${item.periodType})</span>
+                        <span>${itemTotal} جنيه</span>
+                    </div>
+                `;
+                checkoutSummaryItems.appendChild(itemElement);
+            });
+            
+            const shipping = 500;
+            const total = subtotal + shipping;
+            
+            document.getElementById('checkoutSubtotal').textContent = `${subtotal} جنيه`;
+            document.getElementById('checkoutShipping').textContent = `${shipping} جنيه`;
+            document.getElementById('checkoutTotal').textContent = `${total} جنيه`;
+            
+            const cartModal = bootstrap.Modal.getInstance(document.getElementById('cartModal'));
+            cartModal.hide();
+            
+            const paymentModal = new bootstrap.Modal(document.getElementById('paymentMethodsModal'));
+            paymentModal.show();
         }
 
-        // اختيار طريقة الدفع
-        function selectPaymentMethod(method) {
-            // حفظ طريقة الدفع في LocalStorage
-            localStorage.setItem('paymentMethod', method);
-
-            // حفظ معلومات السلة في LocalStorage
-            localStorage.setItem('cart', JSON.stringify(cart));
-
-            // الانتقال إلى صفحة الدفع
-            window.location.href = 'payment.html';
+        function selectPaymentMethod(element, method) {
+            selectedPaymentMethod = method;
+            
+            // Remove selected class from all payment methods
+            document.querySelectorAll('.payment-method').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked payment method
+            element.classList.add('selected');
+            
+            // Hide all payment details
+            document.querySelectorAll('.payment-method .card-details').forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            // Show payment details for selected method
+            if (method === 'بطاقة ائتمانية') {
+                document.getElementById('creditCardDetails').style.display = 'block';
+            }
         }
+
+        function completePayment() {
+            if (cart.length === 0) {
+                showToast('سلة التأجير فارغة!');
+                return;
+            }
+            
+            if (selectedPaymentMethod === 'بطاقة ائتمانية') {
+                const cardNumber = document.getElementById('cardNumber').value;
+                const cardExpiry = document.getElementById('cardExpiry').value;
+                const cardCvv = document.getElementById('cardCvv').value;
+                const cardName = document.getElementById('cardName').value;
+                
+                if (!cardNumber || !cardExpiry || !cardCvv || !cardName) {
+                    showToast('الرجاء إدخال جميع بيانات البطاقة الائتمانية');
+                    return;
+                }
+            }
+            
+            // In a real app, you would send the order to the server here
+            showToast('تم تأكيد طلبك بنجاح! سنقوم بالتواصل معك قريباً');
+            
+            // Reset cart
+            cart = [];
+            updateCartCount();
+            
+            // Close payment modal
+            const paymentModal = bootstrap.Modal.getInstance(document.getElementById('paymentMethodsModal'));
+            paymentModal.hide();
+        }
+
+        function showToast(message) {
+            const toastEl = document.getElementById('successToast');
+            const toastBody = toastEl.querySelector('.toast-body');
+            toastBody.textContent = message;
+            
+            const toast = new bootstrap.Toast(toastEl);
+            toast.show();
+        }
+
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animatedElements.forEach(el => {
+                el.style.opacity = 0;
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        });
     </script>
-
 </body>
 </html>

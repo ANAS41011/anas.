@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- Bootstrap CSS -->
-  
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
         
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
@@ -19,200 +18,7 @@
     <link rel="stylesheet" href="styel.css">
 
     <script defer src="script.js"></script>
-    
-    <style>
-  
-    </style>
-    
-</head>
-<body>
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>شريط الإشعارات</title>
-  <style>
-    /* تصميم الشريط */
-    .notification-bar {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background-color: #ffcc00;
-      color: white;
-      text-align: center;
-      padding: 10px;
-      font-size: 16px;
-      font-family: Arial, sans-serif;
-      z-index: 1000;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    /* زر إغلاق الشريط */
-    .close-btn {
-      position: absolute;
-      top: 50%;
-      right: 10px;
-      transform: translateY(-50%);
-      background-color: transparent;
-      border: none;
-      color: white;
-      font-size: 20px;
-      cursor: pointer;
-    }
-
-    /* تأثير hover للزر */
-    .close-btn:hover {
-      color: #ff4444;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- شريط الإشعارات -->
-  <div class="notification-bar" id="notificationBar">
-    <span>تنبيه! لدينا عرض خاص للمزارعين. احصل على 10% خصم على جميع المعدات هذا الأسبوع!</span>
-    <button class="close-btn" onclick="closeNotification()">×</button>
-  </div>
-
-  <script>
-    // وظيفة إغلاق الشريط
-    function closeNotification() {
-      document.getElementById('notificationBar').style.display = 'none';
-    }
-  </script>
-
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>شريط الإشعارات</title>
-  <style>
-    /* تصميم الشريط */
-    .notification-bar {
-      position: fixed;
-      top: -50px;  
-      width: 100%;
-      background-color: #ffcc00;
-      color: white;
-      text-align: center;
-      padding: 10px;
-      font-size: 16px;
-      font-family: Arial, sans-serif;
-      z-index: 1000;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: top 0.5s ease-in-out;  
-    }
-
-    /*  الاعلان*/
-    .close-btn {
-      position: absolute;
-      top: 50%;
-      right: 10px;
-      transform: translateY(-50%);
-      background-color: transparent;
-      border: none;
-      color: white;
-      font-size: 20px;
-      cursor: pointer;
-    }
-
-    /* HOVER*/
-    .close-btn:hover {
-      color: #ff4444;
-   
-    }
-  </style>
-</head>
-<body>
-
-  <!-- شريط الإشعارات -->
-  <div class="notification-bar" id="notificationBar">
-    <span id="notificationText"></span>
-    <button class="close-btn" onclick="closeNotification()">×</button>
-  </div>
-
-  <script>
-    const notifications = [
-      "تنبيه! لدينا عرض خاص للمزارعين. احصل على 10% خصم على جميع المعدات هذا الأسبوع!",
-      "لا تفوت فرصة التسجيل في ورش العمل المجانية عن الزراعة المستدامة.",
-      "هل تعلم؟ بتحديثات الطقس الأسبوعية عبر موقعنا، يمكن تحسين المحاصيل بنسبة 15%.",
-      "احصل على خصومات حصرية عند شراء الأسمدة عبر موقعنا."
-    ];
-
-    
-    function getRandomNotification() {
-      const randomIndex = Math.floor(Math.random() * notifications.length);
-      return notifications[randomIndex];
-    }
-
-    
-    document.getElementById('notificationText').textContent = getRandomNotification();
-
-    
-    function showNotification() {
-      document.getElementById('notificationBar').style.top = '0';  // الشريط يظهر من الأعلى
-    }
-
-    function closeNotification() {
-      document.getElementById('notificationBar').style.top = '-50px';  // الشريط يختفي
-    }
-
-    window.onload = showNotification;
-
-    //الوقت
-    setTimeout(closeNotification, 3000); ي
-
-  </script>
-
-</body>
-</html>
-
-    <!-- الهيدر -->
-    <header class="header">
-        <div class="container d-flex justify-content-between align-items-center">
-            <div class="logo">🌾 Agri pulse </div>
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand" href="index.html" style="color:white;">الرئيسية</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon" ></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="fet.html" style="color: white;">قيمنا</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="المجتمع.html" style="color: white;"> المجتمع</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="services (1).html" style="color: white;">الخدمات</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="Contact (1).html" style="color: white;">تواصل معنا</a>
-                        </li>
-                        <a class="nav-link" href="about-1.html" style="color: white;">من نحن </a>
-                    </li>
-                    </ul>
-                </div>
-            </nav>
-            <!-- زر تسجيل الخروج -->
-            <a href="login.html" class="btn btn-danger">تسجيل الخروج</a>
-        </div>
-    </header>
-
-    <!--(Hero Section) -->
-    <section class="hero d-flex align-items-center justify-content-center text-center">
-        <div class="container">
-            <h1 class="display-4 text-white">مرحلا بكم في نبض الزراعه</h1>
-            <p class="lead text-white">حلول زراعية متكاملة لدعم مجتمع المزارعين.</p>
-            <a href="services (1).html" class="btn btn-warning btn-start">ابدأ الآن</a>
-        </div>
-    </section>
-
+     
     <style>
         .hero {
             background-image: url(pic.jpg); 
@@ -226,85 +32,342 @@
             text-align: center; 
             opacity: 0; 
             animation: fadeIn 1s forwards; 
-       }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0; 
-            }
-            to {
-                opacity: 1; 
-            }
         }
 
-        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
     </style>
-
-   <!-- الخدماتا -->
-<section class="features py-5">
+</head>
+<body>
+  <!DOCTYPE html>
+  <html lang="ar" dir="rtl">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>الرئيسية | منصة المزارعين</title>
+      <!--الخط-->
+      <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  
+      <!-- Bootstrap CSS -->
+      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+          
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+      
+      <link href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css" rel="stylesheet">
+      <link href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css" rel="stylesheet">
+      
+      <link rel="stylesheet" href="styel.css">
+  
+      <script defer src="script.js"></script>
+       
+      <style>
+          .hero {
+              background-image: url(pic.jpg); 
+              background-size: cover; 
+              background-position: center; 
+              max-height: 70vh; 
+              padding: 100px;
+              display: flex; 
+              align-items: center;
+              justify-content: center; 
+              text-align: center; 
+              opacity: 0; 
+              animation: fadeIn 1s forwards; 
+          }
+  
+          @keyframes fadeIn {
+              from { opacity: 0; }
+              to { opacity: 1; }
+          }
+      </style>
+  </head>
+  <body>
+  
+  </script>
+  
+      <!-- الهيدر -->
+      <header class="header">
+          <div class="container d-flex justify-content-between align-items-center">
+              <div class="logo">🌾 Agri-pulse </div>
+              <nav class="navbar navbar-expand-lg navbar-light">
+                  <a class="navbar-brand" href="index.html" style="color:white;">الرئيسية</a>
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon" ></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarNav">
+                      <ul class="navbar-nav ml-auto">
+                          <li class="nav-item active">
+                              <a class="nav-link" href="fet.html" style="color: white;">قيمنا</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="المجتمع.html" style="color: white;"> المجتمع</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="services (1).html" style="color: white;">الخدمات</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="Contact (1).html" style="color: white;">تواصل معنا</a>
+                          </li>
+                          <a class="nav-link" href="about-1.html" style="color: white;">من نحن </a>
+                      </li>
+                      </ul>
+                  </div>
+              </nav>
+              <!-- زر تسجيل الخروج -->
+              <a href="login.html" class="btn btn-danger">تسجيل الخروج</a>
+          </div>
+      </header>
+  
+      <!--(Hero Section) -->
+      <section class="hero d-flex align-items-center justify-content-center text-center">
+          <div class="container">
+              <h1 class="display-4 text-white">مرحبا بكم في نبض الزراعة</h1>
+              <p class="lead text-white">في كل خطوه حياة</p>
+              <button id="scrollDownBtn" class="btn btn-warning btn-start">ابدأ الآن</button>
+          </div>
+      </section>
+  
+      <!-- الخدماتا -->
+      <section class="features py-5">
+          <div class="container">
+              <h2 class="text-center mb-4 text-success">ماذا نقدم؟</h2>
+              <div class="row">
+                  <div class="col-md-4">
+                      <a href="agricultural-tips-1.html" class="feature-box btn btn-success btn-animated">
+                          <i class="fas fa-seedling fa-3x mb-3"></i>
+                          <h3>نصائح زراعية</h3>
+                          <p>احصل على نصائح زراعية لتحسين محاصيلك وزيادة الإنتاجية.</p>
+                      </a>
+                  </div>
+                  <div class="col-md-4">
+                      <a href="expert-consultation (1).html" class="feature-box btn btn-success btn-animated">
+                          <i class="fas fa-headset fa-3x mb-3"></i>
+                          <h3>تواصل مع الخبراء</h3>
+                          <p>تواصل مباشرة مع خبراء في المجال الزراعي للحصول على استشارات.</p>
+                      </a>
+                  </div>
+                  <div class="col-md-4">
+                      <a href="online-market (1).html" class="feature-box btn btn-success btn-animated">
+                          <i class="fas fa-store fa-3x mb-3"></i>
+                          <h3>سوق إلكتروني</h3>
+                          <p>بيع وشراء المنتجات الزراعية عبر منصتنا الإلكترونية بسهولة.</p>
+                      </a>
+                  </div>
+                  <div class="col-md-4">
+                      <a href="price-guide.html" class="feature-box btn btn-success btn-animated">
+                          <i class="fas fa-chart-line fa-3x mb-3"></i>
+                          <h3>دليل الأسعار</h3>
+                          <p>احصل على دليل الأسعار الخاصة بالمنتجات الزراعية في السوق المحلي والعالمي.</p>
+                      </a>
+                  </div>
+                  <div class="col-md-4">
+                      <a href="weather-alerts-1.html" class="feature-box btn btn-success btn-animated">
+                          <i class="fas fa-cloud-sun fa-3x mb-3"></i>
+                          <h3>تنبيهات الطقس</h3>
+                          <p>كن على اطلاع دائم بحالة الطقس وأثرها على محاصيلك الزراعية.</p>
+                      </a>
+                  </div>
+                  <div class="col-md-4">
+                      <a href="equipment-rental (1).html" class="feature-box btn btn-success btn-animated">
+                          <i class="fas fa-tools fa-3x mb-3"></i>
+                          <h3>تأجير المعدات</h3>
+                          <p>استأجر المعدات الزراعية الحديثة لزيادة الإنتاجية وتوفير التكاليف.</p>
+                      </a>
+                  </div>
+              </div>
+          </div>
+      </section>
+  
+   
+      <!-- المكتبات  -->
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+  
+      <!-- السكريبت المضافة للتمرير -->
+      <script>
+          document.getElementById('scrollDownBtn').addEventListener('click', function() {
+              window.scrollBy({
+                  top: window.innerHeight,
+                  behavior: 'smooth'
+              });
+          });
+      </script>
+  
+  </body>
+  </html>
+<!--ة-->
+<section class="stats-section py-5 bg-light">
     <div class="container">
-        <h2 class="text-center mb-4 text-success">ماذا نقدم؟</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <a href="agricultural-tips-1.html" class="feature-box btn btn-success btn-animated">
-                    <i class="fas fa-seedling fa-3x mb-3"></i>
-                    <h3>نصائح زراعية</h3>
-                    <p>احصل على نصائح زراعية لتحسين محاصيلك وزيادة الإنتاجية.</p>
-                </a>
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <div class="stat-item p-4">
+                    <i class="fas fa-users fa-3x mb-3 text-success"></i>
+                    <h3 class="counter display-4 fw-bold" data-target="5000">0</h3>
+                    <p class="text-muted">مزارع مسجل</p>
+                </div>
             </div>
-            <div class="col-md-4">
-                <a href="expert-consultation (1).html" class="feature-box btn btn-success btn-animated">
-                    <i class="fas fa-headset fa-3x mb-3"></i>
-                    <h3>تواصل مع الخبراء</h3>
-                    <p>تواصل مباشرة مع خبراء في المجال الزراعي للحصول على استشارات.</p>
-                </a>
+            <div class="col-md-4 mb-4">
+                <div class="stat-item p-4">
+                    <i class="fas fa-shopping-basket fa-3x mb-3 text-success"></i>
+                    <h3 class="counter display-4 fw-bold" data-target="1200">0</h3>
+                    <p class="text-muted">منتج متاح</p>
+                </div>
             </div>
-            <div class="col-md-4">
-                <a href="online-market (1).html" class="feature-box btn btn-success btn-animated">
-                    <i class="fas fa-store fa-3x mb-3"></i>
-                    <h3>سوق إلكتروني</h3>
-                    <p>بيع وشراء المنتجات الزراعية عبر منصتنا الإلكترونية بسهولة.</p>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="price-guide (1).html" class="feature-box btn btn-success btn-animated">
-                    <i class="fas fa-chart-line fa-3x mb-3"></i>
-                    <h3>دليل الأسعار</h3>
-                    <p>احصل على دليل الأسعار الخاصة بالمنتجات الزراعية في السوق المحلي والعالمي.</p>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="weather-alerts-1.html" class="feature-box btn btn-success btn-animated">
-                    <i class="fas fa-cloud-sun fa-3x mb-3"></i>
-                    <h3>تنبيهات الطقس</h3>
-                    <p>كن على اطلاع دائم بحالة الطقس وأثرها على محاصيلك الزراعية.</p>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="equipment-rental (1).html" class="feature-box btn btn-success btn-animated">
-                    <i class="fas fa-tools fa-3x mb-3"></i>
-                    <h3>تأجير المعدات</h3>
-                    <p>استأجر المعدات الزراعية الحديثة لزيادة الإنتاجية وتوفير التكاليف.</p>
-                </a>
+            <div class="col-md-4 mb-4">
+                <div class="stat-item p-4">
+                    <i class="fas fa-eye fa-3x mb-3 text-success"></i>
+                    <h3 class="counter display-4 fw-bold" data-target="8500">0</h3>
+                    <p class="text-muted">زيارة للموقع</p>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-    <!-- الفوتر -->
-    <footer class="footer py-4">
-        <div class="container text-center">
-            <p>© 2025 منصة المزارعين. جميع الحقوق محفوظة.</p>
+<!-- أضف هذا النمط في قسم الستايل -->
+<style>
+    .stats-section {
+        background-color: #f8f9fa;
+        margin: 2rem 0;
+    }
+    
+    .stat-item {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+    }
+    
+    .stat-item:hover {
+        transform: translateY(-10px);
+    }
+    
+    .counter {
+        color: #28a745;
+        font-weight: 700;
+    }
+</style>
+
+<!-- أضف هذا السكريبت قبل غلق body -->
+<script>
+    // عداد الأرقام المتحركة
+    document.addEventListener('DOMContentLoaded', () => {
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200; // السرعة بالمللي ثانية
+        
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const increment = target / speed;
+                
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + increment);
+                    setTimeout(animateCounters, 1);
+                } else {
+                    counter.innerText = target.toLocaleString(); // تنسيق الأرقام
+                }
+            });
+        };
+        
+        // تشغيل العداد عند الوصول للقسم
+        const statsSection = document.querySelector('.stats-section');
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                animateCounters();
+                observer.unobserve(statsSection);
+            }
+        }, { threshold: 0.5 });
+        
+        observer.observe(statsSection);
+    });
+</script>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0 fade-in">
+                    <div class="footer-about">
+                        <div class="footer-logo">
+                            <i class="fas fa-leaf me-2"></i>  Agri-pulse 
+                        </div>
+                        <p>منصة رائدة لمساعده المزارعين في كلفه الخدامات.</p>
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/profile.php?id=100082692758834&locale=ar_AR"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0 fade-in delay-1">
+                    <h4 class="footer-title">روابط سريعة</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="about-1.html">من نحن</a></li>
+                        <li><a href="online-market (1).html">المنتجات</a></li>
+                        <li><a href="المجتمع.html">مجتمع</a></li>
+                        <li><a href="online-market (1).html">العروض</a></li>
+                        <li><a href="equipment-rental (1).html">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0 fade-in delay-2">
+                    <h4 class="footer-title">خدمة العملاء</h4>
+                    <ul class="footer-links">
+                        <li><a href="login.html">حسابي</a></li>
+                        <li><a href="#">تتبع الطلب</a></li>
+                        <li><a href="#">الأسئلة الشائعة</a></li>
+                        <li><a href="#">سياسة الإرجاع</a></li>
+                        <li><a href="#">شروط الاستخدام</a></li>
+                        <li><a href="#">سياسة الخصوصية</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0 fade-in delay-3">
+                    <h4 class="footer-title">اتصل بنا</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>37 شارع محمود سلامه الاسكندريه</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>01276351643</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@souqalmozareen.com</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>الأحد - الخميس: 8 ص - 8 م</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="payment-methods">
+                            <img src="https://via.placeholder.com/40x25?text=Visa" alt="فيزا">
+                            <img src="https://via.placeholder.com/40x25?text=Mastercard" alt="ماستركارد">
+                            <img src="https://via.placeholder.com/40x25?text=Meeza" alt="ميزا">
+                            <img src="https://via.placeholder.com/40x25?text=Fawry" alt="فوري">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </footer>
-
-    <!-- المكتبات  -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
-
-</body>
-</html>
-<Style>
  
+  </script>
+
+   
