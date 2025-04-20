@@ -1,219 +1,415 @@
-<?php
-include("database.php");
-?>
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تسجيل الدخول | منصة المزارعين</title>
+    <meta name="description" content="سجل دخولك إلى منصة المزارعين للوصول إلى جميع الخدمات الزراعية المتكاملة">
+    <!-- تحسينات SEO -->
+    <meta property="og:title" content="تسجيل الدخول | منصة المزارعين">
+    <meta property="og:description" content="سجل دخولك إلى منصة المزارعين للوصول إلى جميع الخدمات الزراعية">
+    <!-- Preload الموارد الهامة -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" as="style">
+    <!-- CSS -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #2e7d32;
+            --primary-light: #4caf50;
+            --primary-dark: #1b5e20;
+            --secondary-color: #ff9800;
+            --secondary-dark: #f57c00;
+            --text-color: #333;
+            --light-color: #f5f5f5;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
         body {
             margin: 0;
             padding: 0;
-            height: 100vh; 
-            background: url('pic.jpg') no-repeat center center fixed; 
-            background-size: cover; 
+            min-height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('pic.jpg') no-repeat center center fixed;
+            background-size: cover;
             font-family: 'Cairo', sans-serif;
-
-           
             display: flex;
-            justify-content: center; 
+            justify-content: center;
             align-items: center;
-            text-align: center;
+            color: var(--light-color);
         }
-
+        /* Logo */
         .logo {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 24px;
-            color: #fff;
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            font-size: 1.8rem;
             font-weight: bold;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-            z-index: 1000;
+            color: white;
+            display: flex;
+            align-items: center;
+            z-index: 100;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
-
-        .login-container {
-            background: linear-gradient(to right, rgba(76, 175, 80, 0.8), rgba(129, 199, 132, 0.8));
-            padding: 30px;
-            border-radius: 15px;
-            width: 350px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transform: scale(0.95);
-            animation: scaleUp 0.5s forwards;
-            transition: background-color 0.3s ease;
+        .logo i {
+            margin-left: 10px;
         }
-        .login-container h2 {
-            margin-bottom: 20px;
-            color: #fff;
-            font-size: 28px;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* إضافة ظل للنص لتحسين وضوحه */
+        /* Auth Container */
+        .auth-container {
+            width: 100%;
+            max-width: 400px;
+            perspective: 1000px;
         }
+        /* Login Card */
+        .auth-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            transform-style: preserve-3d;
+            transition: var(--transition);
+            position: relative;
+            backface-visibility: hidden;
+            transform: rotateY(0deg);
+        }
+        .auth-card.flipped {
+            transform: rotateY(180deg);
+        }
+        .auth-card h2 {
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.8rem;
+            position: relative;
+        }
+        .auth-card h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 60px;
+            height: 3px;
+            background: var(--secondary-color);
+            border-radius: 3px;
+        }
+        /* Form Styles */
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            position: relative;
         }
         .form-group label {
-            color: #fff;
-            font-size: 14px;
+            display: block;
+            margin-bottom: 8px;
+            color: var(--primary-dark);
+            font-weight: bold;
         }
-        .form-group input {
+        .form-control {
             width: 100%;
-            padding: 12px;
-            border-radius: 5px;
-            border: none;
-            font-size: 16px;
-            margin-top: 5px;
+            padding: 15px 15px 15px 45px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: rgba(255,255,255,0.8);
         }
-        .form-group input[type="text"],
-        .form-group input[type="password"] {
-            background: #fff;
-            color: #333;
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.2);
         }
-        .form-group input[type="submit"] {
-            background: #ff9800;
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 40px;
+            color: var(--primary-color);
+        }
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary-color);
             color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: bold;
             cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s ease;
+            transition: var(--transition);
+            margin-top: 10px;
         }
-        .form-group input[type="submit"]:hover {
-            background: #ff5722;
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-        .text-center {
+        .btn-secondary {
+            background: var(--secondary-color);
+        }
+        .btn-secondary:hover {
+            background: var(--secondary-dark);
+        }
+        .auth-footer {
+            text-align: center;
             margin-top: 20px;
-            font-size: 14px;
+            color: var(--text-color);
         }
-        .text-center a {
-            color: #ff9800;
+        .auth-footer a {
+            color: var(--primary-color);
             text-decoration: none;
+            font-weight: bold;
+            transition: var(--transition);
         }
-        .text-center a:hover {
+        .auth-footer a:hover {
+            color: var(--primary-dark);
             text-decoration: underline;
         }
-
-        @keyframes scaleUp {
-            from {
-                transform: scale(0.8);
-                opacity: 0;
+        /* Forgot Password Card (back side) */
+        .forgot-password-card {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            transform: rotateY(180deg);
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        /* Responsive */
+        @media (max-width: 576px) {
+            .auth-card, .forgot-password-card {
+                padding: 30px 20px;
             }
-            to {
-                transform: scale(1);
-                opacity: 1;
+            .logo {
+                font-size: 1.5rem;
+                top: 20px;
+                right: 20px;
             }
         }
-
-        .forgot-password-container {
-            display: none;
-            background: linear-gradient(to right, rgba(76, 175, 80, 0.8), rgba(129, 199, 132, 0.8));
-            padding: 30px;
-            border-radius: 15px;
-            width: 350px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        /* Password Toggle */
+        .password-toggle {
+            position: absolute;
+            left: 15px;
+            top: 40px;
+            cursor: pointer;
+            color: #777;
         }
-        .forgot-password-container.active {
-            display: block;
+        /* Social Login */
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        .social-btn:hover {
+            transform: translateY(-3px);
+        }
+        .facebook {
+            background: #3b5998;
+        }
+        .google {
+            background: #db4437;
+        }
+        .twitter {
+            background: #1da1f2;
         }
     </style>
 </head>
 <body>
-
-    
-    
-    <div class="login-container" id="loginContainer">
-        <h2>تسجيل الدخول</h2>
-        <form id="loginForm">
-            <div class="form-group">
-                <label for="username">اسم المستخدم</label>
-                <input type="text" id="username" name="username" required>
+    <div class="logo">
+        <i class="fas fa-leaf"></i>
+        <span>منصة المزارعين</span>
+    </div>
+    <div class="auth-container">
+        <div class="auth-card" id="authCard">
+            <!-- Front Side - Login Form -->
+            <div class="animate">
+                <h2>تسجيل الدخول</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="username">اسم المستخدم</label>
+                        <i class="fas fa-user input-icon"></i>
+                        <input type="text" id="username" class="form-control" placeholder="أدخل اسم المستخدم" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">كلمة المرور</label>
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" id="password" class="form-control" placeholder="أدخل كلمة المرور" required>
+                        <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn">تسجيل الدخول</button>
+                    </div>
+                </form>
+                <div class="social-login">
+                    <a href="#" class="social-btn facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-btn google">
+                        <i class="fab fa-google"></i>
+                    </a>
+                    <a href="#" class="social-btn twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+                <div class="auth-footer">
+                    <p><a href="#" id="forgotPasswordLink">نسيت كلمة المرور؟</a></p>
+                    <p>ليس لديك حساب؟ <a href="register.html">إنشاء حساب جديد</a></p>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="password">كلمة المرور</label>
-                <input type="password" id="password" name="password" required>
+            <!-- Back Side - Forgot Password Form -->
+            <div class="forgot-password-card">
+                <h2 class="animate">استعادة كلمة المرور</h2>
+                <form id="forgotPasswordForm" class="animate" style="animation-delay: 0.2s">
+                    <div class="form-group">
+                        <label for="email">البريد الإلكتروني</label>
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" id="email" class="form-control" placeholder="أدخل بريدك الإلكتروني" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-secondary">إرسال رابط الاستعادة</button>
+                    </div>
+                </form>
+                <div class="auth-footer animate" style="animation-delay: 0.4s">
+                    <p><a href="#" id="backToLoginLink">العودة إلى تسجيل الدخول</a></p>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="تسجيل الدخول">
-            </div>
-        </form>
-        <div class="text-center">
-            <p><a href="#" id="forgotPasswordLink">نسيت كلمة المرور؟</a></p>
-            <p>ليس لديك حساب؟ <a href="register.html">إنشاء حساب جديد</a></p>
         </div>
     </div>
-
-    
-    <div class="forgot-password-container" id="forgotPasswordContainer">
-        <h2>استعادة كلمة المرور</h2>
-        <form id="forgotPasswordForm">
-            <div class="form-group">
-                <label for="phoneNumber">رقم الهاتف</label>
-                <input type="text" id="phoneNumber" name="phoneNumber" required>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="إرسال الرمز">
-            </div>
-        </form>
-        <div class="text-center">
-            <p><a href="#" id="backToLoginLink">العودة إلى تسجيل الدخول</a></p>
-        </div>
-    </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-       
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();  
+        document.addEventListener('DOMContentLoaded', function() {
+            const authCard = document.getElementById('authCard');
+            const loginForm = document.getElementById('loginForm');
+            const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+            const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+            const backToLoginLink = document.getElementById('backToLoginLink');
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
 
-          
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+            // Toggle Password Visibility
+            togglePassword.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.classList.toggle('fa-eye-slash');
+            });
 
-           
-            const storedUsername = localStorage.getItem(username);
+            // Flip Card to Forgot Password
+            forgotPasswordLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                authCard.classList.add('flipped');
+            });
 
-            if (storedUsername && storedUsername === password) {
-                alert('تم تسجيل الدخول بنجاح!');
-                window.location.href = "index.html"; 
-            } else {
-                alert('اسم المستخدم أو كلمة المرور غير صحيحة.');
-            }
-        });
+            // Flip Card back to Login
+            backToLoginLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                authCard.classList.remove('flipped');
+            });
 
-       
-        document.getElementById('forgotPasswordLink').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.getElementById('loginContainer').style.display = 'none';
-            document.getElementById('forgotPasswordContainer').classList.add('active');
-        });
+            // Login Form Submission
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
 
-       
-        document.getElementById('backToLoginLink').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.getElementById('forgotPasswordContainer').classList.remove('active');
-            document.getElementById('loginContainer').style.display = 'block';
-        });
+                // Here you would typically send data to server for validation
+                // For demo, we'll use localStorage
+                const storedUser = localStorage.getItem(username);
+                if (storedUser && storedUser === password) {
+                    Swal.fire({
+                        title: 'تم تسجيل الدخول بنجاح!',
+                        text: 'جاري تحويلك إلى الصفحة الرئيسية...',
+                        icon: 'success',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        willClose: () => {
+                            window.location.href = "index.html";
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'خطأ في تسجيل الدخول',
+                        text: 'اسم المستخدم أو كلمة المرور غير صحيحة',
+                        icon: 'error',
+                        confirmButtonText: 'حسنًا'
+                    });
+                }
+            });
 
-      
-        document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
-            e.preventDefault(); 
-           
-            const phoneNumber = document.getElementById('phoneNumber').value;
+            // Forgot Password Form Submission
+            forgotPasswordForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('email').value;
+                Swal.fire({
+                    title: 'تم إرسال رابط الاستعادة',
+                    text: `تم إرسال رابط إعادة تعيين كلمة المرور إلى ${email}`,
+                    icon: 'success',
+                    confirmButtonText: 'حسنًا'
+                }).then(() => {
+                    authCard.classList.remove('flipped');
+                    forgotPasswordForm.reset();
+                });
+            });
 
-           
-            alert(`تم إرسال رمز استعادة الحساب إلى الرقم: ${phoneNumber}`);
-        });
+            // Add hover effect to auth card
+            authCard.addEventListener('mouseenter', () => {
+                authCard.style.transform = authCard.classList.contains('flipped') 
+                    ? 'rotateY(180deg) translateY(-5px)' 
+                    : 'rotateY(0deg) translateY(-5px)';
+                authCard.style.boxShadow = '0 15px 35px rgba(0,0,0,0.3)';
+            });
 
-         
-        const loginContainer = document.getElementById('loginContainer');
-        
-        loginContainer.addEventListener('mouseover', function() {
-            loginContainer.style.backgroundColor = 'rgba(76, 175, 80, 0.7)'; 
-        });
-        
-        loginContainer.addEventListener('mouseout', function() {
-            loginContainer.style.backgroundColor = ''; 
+            authCard.addEventListener('mouseleave', () => {
+                authCard.style.transform = authCard.classList.contains('flipped') 
+                    ? 'rotateY(180deg)' 
+                    : 'rotateY(0deg)';
+                authCard.style.boxShadow = 'var(--shadow)';
+            });
+
+            // Social Media Login
+            const socialLinks = document.querySelectorAll('.social-btn');
+            socialLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const provider = this.classList[1]; // Get the provider (facebook, google, twitter)
+                    Swal.fire({
+                        title: `جارٍ تسجيل الدخول باستخدام ${provider.charAt(0).toUpperCase() + provider.slice(1)}...`,
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        },
+                        willClose: () => {
+                            window.location.href = `https://${provider}.com`; // Redirect to respective provider
+                        }
+                    });
+                });
+            });
         });
     </script>
-
 </body>
 </html>

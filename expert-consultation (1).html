@@ -3,250 +3,746 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>التواصل مع الخبراء | منصة المزارعين</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <title>التواصل مع الخبراء | منصة المزارعين الذكية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #2d6a4f;
+            --primary-light: #4caf50;
+            --secondary-color: #ffc107;
+            --dark-color: #343a40;
+            --light-color: #f8f9fa;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
         body {
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
         }
+        
         .header {
-            background-color: #28a745;
-            padding: 15px 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            box-shadow: var(--shadow);
+            padding: 1rem 0;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
             color: white;
         }
-        .navbar-nav .nav-link {
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 500;
+            margin: 0 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover, .nav-link.active {
             color: white;
-            font-weight: bold;
+            transform: translateY(-2px);
         }
-        .navbar-nav .nav-link:hover {
-            color: #ffc107;
+        
+        .service-hero {
+            background: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center;
+            background-size: cover;
+            padding: 5rem 0;
+            position: relative;
+            color: white;
         }
-        .service-detail h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
+        
+        .service-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
         }
+        
+        .service-hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .expert-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        
+        .expert-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .expert-img {
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
+        }
+        
+        .expert-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+            padding: 0.25rem 0.5rem;
+            border-radius: 5px;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+        
         .consultation-form {
-            margin-top: 30px;
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 8px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
         }
+        
+        .form-control, .form-select {
+            border-radius: 5px;
+            padding: 0.75rem 1rem;
+            border: 1px solid #ddd;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(45, 106, 79, 0.25);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #245847;
+            border-color: #245847;
+            transform: translateY(-2px);
+        }
+        
         .footer {
-            background-color: #333;
+            background-color: var(--dark-color);
             color: white;
-            padding: 20px 0;
+            padding: 2rem 0;
         }
-        .footer p {
-            margin: 0;
-        }
+        
+        /* شات بوكس محسن */
         .chatbox-container {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            width: 350px;
-            height: 450px;
+            width: 380px;
+            height: 500px;
             background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 10px;
+            border-radius: 15px;
             display: none;
             flex-direction: column;
-            justify-content: space-between;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             z-index: 1000;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
         }
+        
         .chatbox-header {
-            background-color: #28a745;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
             color: white;
-            padding: 10px;
-            text-align: center;
-            border-radius: 10px 10px 0 0;
-        }
-        .chatbox-body {
-            padding: 15px;
-            flex-grow: 1;
-            overflow-y: auto;
-            height: 300px;
-        }
-        .chatbox-footer {
-            padding: 10px;
+            padding: 1rem;
             display: flex;
-            gap: 10px;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 15px 15px 0 0;
         }
-        .chatbox-footer input {
-            flex: 1;
-            padding: 10px;
-            border-radius: 5px;
+        
+        .chatbox-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .chatbox-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        
+        .chatbox-body {
+            flex-grow: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            background-color: #f5f5f5;
+        }
+        
+        .chatbox-footer {
+            padding: 1rem;
+            background-color: white;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .chat-input {
+            flex-grow: 1;
             border: 1px solid #ddd;
+            border-radius: 25px;
+            padding: 0.75rem 1rem;
+            outline: none;
+            transition: all 0.3s ease;
         }
-        .chatbox-footer button {
-            padding: 10px;
-            background-color: #28a745;
+        
+        .chat-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(45, 106, 79, 0.2);
+        }
+        
+        .chat-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             border: none;
-            color: white;
             cursor: pointer;
-            border-radius: 5px;
+            transition: all 0.3s ease;
         }
-        #mic {
-            background-color: #ffc107;
+        
+        .chat-btn-primary {
+            background-color: var(--primary-color);
             color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
         }
-        /* أنماط الشات بوكس الذكي */
+        
+        .chat-btn-primary:hover {
+            background-color: #245847;
+            transform: scale(1.05);
+        }
+        
+        .chat-btn-secondary {
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+        }
+        
+        .chat-btn-secondary:hover {
+            background-color: #e0a800;
+            transform: scale(1.05);
+        }
+        
+        /* رسائل الشات */
         .message {
-            margin-bottom: 10px;
-            padding: 10px 15px;
-            border-radius: 15px;
+            margin-bottom: 15px;
             max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 18px;
             word-wrap: break-word;
             animation: fadeIn 0.3s ease-out;
+            position: relative;
+            line-height: 1.5;
         }
-        .message.user {
-            background-color: #dcf8c6;
+        
+        .message-user {
+            background-color: #e3f2fd;
             margin-left: auto;
             margin-right: 10px;
             border-bottom-right-radius: 5px;
+            color: #0d47a1;
         }
-        .message.bot {
-            background-color: #e9ecef;
+        
+        .message-bot {
+            background-color: #f1f1f1;
             margin-right: auto;
             margin-left: 10px;
             border-bottom-left-radius: 5px;
+            color: #333;
         }
+        
+        .message-time {
+            font-size: 0.7rem;
+            color: #757575;
+            margin-top: 5px;
+            text-align: right;
+        }
+        
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        
+        /* مؤشر الكتابة */
         .typing-indicator {
             display: inline-block;
             padding: 10px 15px;
+            background-color: #f1f1f1;
+            border-radius: 18px;
+            margin-bottom: 15px;
         }
+        
         .typing-dot {
             display: inline-block;
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background-color: #888;
+            background-color: #666;
             margin: 0 2px;
             animation: typingAnimation 1.4s infinite ease-in-out;
         }
+        
         .typing-dot:nth-child(1) {
             animation-delay: 0s;
         }
+        
         .typing-dot:nth-child(2) {
             animation-delay: 0.2s;
         }
+        
         .typing-dot:nth-child(3) {
             animation-delay: 0.4s;
         }
+        
         @keyframes typingAnimation {
             0%, 60%, 100% { transform: translateY(0); }
             30% { transform: translateY(-5px); }
+        }
+        
+        /* زر الشات */
+        .chat-toggle-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .chat-toggle-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+        
+        /* تأثيرات إضافية */
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 3px;
+        }
+        
+        .expert-specialty {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background-color: var(--primary-light);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* تأثيرات للبطاقات */
+        .hover-effect {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-effect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* متجاوب */
+        @media (max-width: 768px) {
+            .chatbox-container {
+                width: 90%;
+                right: 5%;
+                height: 70vh;
+                bottom: 10px;
+            }
+            
+            .expert-card {
+                margin-bottom: 1rem;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- الهيدر -->
+    <!-- الهيدر المحسن -->
     <header class="header sticky-top">
         <div class="container">
-            <div class="logo">🌾 نبض الزراعة</div>
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand" href="index.html">الرئيسية</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <a class="navbar-brand" href="#">
+                    <i class="fas fa-leaf"></i> منصة المزارعين
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="about-1.html">من نحن</a>
+                            <a class="nav-link active" href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="services (1).html">الخدمات</a>
+                            <a class="nav-link" href="about-1.html"><i class="fas fa-info-circle"></i> من نحن</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Contact (1).html">تواصل معنا</a>
+                            <a class="nav-link" href="services (1).html"><i class="fas fa-concierge-bell"></i> الخدمات</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Contact (1).html"><i class="fas fa-envelope"></i> تواصل معنا</a>
                         </li>
                     </ul>
+                    <div class="d-flex">
+                        <a href="login.html" class="btn btn-outline-light me-2"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
+                        <a href="register.html" class="btn btn-light"><i class="fas fa-user-plus"></i> إنشاء حساب</a>
+                    </div>
                 </div>
             </nav>
         </div>
     </header>
 
-    <!-- محتوى الخدمة -->
-    <section class="service-detail py-5">
-        <div class="container text-center">
-            <h2>التواصل مع الخبراء</h2>
-            <p>استشر الخبراء الزراعيين للحصول على نصائح وتوجيهات حول كيفية تحسين إنتاجك الزراعي.</p>
-            <div class="consultation-form">
-                <h3>للتواصل مع الخبير:</h3>
-                <form action="submit_form.php" method="POST">
-                    <div class="form-group">
-                        <label for="name">الاسم</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
+    <!-- قسم البطل -->
+    <section class="service-hero">
+        <div class="container">
+            <div class="service-hero-content text-center py-5">
+                <h1 class="display-4 fw-bold mb-4">التواصل مع الخبراء الزراعيين</h1>
+                <p class="lead mb-5">استشر خبراء الزراعة المحترفين واحصل على إجابات فورية لأسئلتك الزراعية</p>
+                <a href="#experts" class="btn btn-primary btn-lg px-4 me-2"><i class="fas fa-users"></i> عرض الخبراء</a>
+                <a href="#consultation" class="btn btn-outline-light btn-lg px-4"><i class="fas fa-envelope"></i> إرسال استشارة</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الخبراء -->
+    <section id="experts" class="py-5 bg-white">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">خبراؤنا الزراعيون</h2>
+            
+            <div class="row">
+                <!-- خبير 1 -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="expert-card hover-effect h-100">
+                        <div class="position-relative">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" class="expert-img" alt="خبير زراعي">
+                            <div class="expert-badge">متاح الآن</div>
+                        </div>
+                        <div class="p-3">
+                            <h4 class="mb-2">د. أحمد محمد</h4>
+                            <p class="text-muted mb-3">خبير في الزراعة العضوية وتسميد التربة</p>
+                            <div>
+                                <span class="expert-specialty">الزراعة العضوية</span>
+                                <span class="expert-specialty">تسميد التربة</span>
+                                <span class="expert-specialty">المحاصيل</span>
+                            </div>
+                            <div class="d-flex justify-content-between mt-3">
+                                <a href="#" class="btn btn-sm btn-outline-primary">عرض الملف</a>
+                                <a href="#" class="btn btn-sm btn-primary">إرسال رسالة</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="message">الرسالة</label>
-                        <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                </div>
+                
+                <!-- خبير 2 -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="expert-card hover-effect h-100">
+                        <div class="position-relative">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" class="expert-img" alt="خبيرة زراعية">
+                            <div class="expert-badge">متاح الآن</div>
+                        </div>
+                        <div class="p-3">
+                            <h4 class="mb-2">د. سارة عبدالله</h4>
+                            <p class="text-muted mb-3">خبيرة في أمراض النباتات والمبيدات</p>
+                            <div>
+                                <span class="expert-specialty">أمراض النبات</span>
+                                <span class="expert-specialty">المبيدات</span>
+                                <span class="expert-specialty">الوقاية</span>
+                            </div>
+                            <div class="d-flex justify-content-between mt-3">
+                                <a href="#" class="btn btn-sm btn-outline-primary">عرض الملف</a>
+                                <a href="#" class="btn btn-sm btn-primary">إرسال رسالة</a>
+                            </div>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">إرسال</button>
-                </form>
+                </div>
+                
+                <!-- خبير 3 -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="expert-card hover-effect h-100">
+                        <div class="position-relative">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" class="expert-img" alt="خبير زراعي">
+                            <div class="expert-badge">غير متاح</div>
+                        </div>
+                        <div class="p-3">
+                            <h4 class="mb-2">م. خالد فاروق</h4>
+                            <p class="text-muted mb-3">خبير في نظم الري الحديثة</p>
+                            <div>
+                                <span class="expert-specialty">الري الحديث</span>
+                                <span class="expert-specialty">التنقيط</span>
+                                <span class="expert-specialty">الرش</span>
+                            </div>
+                            <div class="d-flex justify-content-between mt-3">
+                                <a href="#" class="btn btn-sm btn-outline-primary">عرض الملف</a>
+                                <a href="#" class="btn btn-sm btn-secondary disabled">غير متاح</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- نموذج الاستشارة -->
+    <section id="consultation" class="py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="consultation-form hover-effect">
+                        <h2 class="section-title mb-4">إرسال استشارة للخبراء</h2>
+                        <p class="mb-4 text-muted">املأ النموذج التالي وسيقوم أحد خبرائنا بالرد عليك في أقرب وقت</p>
+                        
+                        <form>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">الاسم الكامل</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">البريد الإلكتروني</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="phone" class="form-label">رقم الهاتف</label>
+                                    <input type="tel" class="form-control" id="phone">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="expert" class="form-label">اختر الخبير (اختياري)</label>
+                                    <select class="form-select" id="expert">
+                                        <option value="">أي خبير متاح</option>
+                                        <option value="1">د. أحمد محمد - الزراعة العضوية</option>
+                                        <option value="2">د. سارة عبدالله - أمراض النبات</option>
+                                        <option value="3">م. خالد فاروق - نظم الري</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label for="subject" class="form-label">موضوع الاستشارة</label>
+                                    <input type="text" class="form-control" id="subject" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="message" class="form-label">نص الاستشارة</label>
+                                    <textarea class="form-control" id="message" rows="5" required></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <label for="attachment" class="form-label">إرفاق صورة (اختياري)</label>
+                                    <input class="form-control" type="file" id="attachment">
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <button type="submit" class="btn btn-primary px-4 py-2">
+                                        <i class="fas fa-paper-plane me-2"></i> إرسال الاستشارة
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الأسئلة الشائعة -->
+    <section class="py-5 bg-white">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">أسئلة شائعة</h2>
+            
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item mb-3 border-0 shadow-sm">
+                    <h3 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            كيف يمكنني التواصل مع الخبراء مباشرة؟
+                        </button>
+                    </h3>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            يمكنك التواصل مع الخبراء مباشرة من خلال إرسال رسالة عبر النموذج أعلاه أو من خلال الدردشة المباشرة مع الخبراء المتاحين. كما يمكنك استخدام مساعدنا الذكي للحصول على إجابات سريعة.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item mb-3 border-0 shadow-sm">
+                    <h3 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            هل هناك رسوم على الاستشارات؟
+                        </button>
+                    </h3>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            معظم الاستشارات الأساسية مجانية، ولكن بعض الخبراء قد يقدمون استشارات متخصصة برسوم رمزية. سيتم إعلامك بأي رسوم قبل تأكيد الاستشارة.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item mb-3 border-0 shadow-sm">
+                    <h3 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            كم تستغرق وقتاً للرد على استشارتي؟
+                        </button>
+                    </h3>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            معظم الاستشارات يتم الرد عليها خلال 24 ساعة. إذا اخترت خبيراً معيناً، قد يختلف وقت الرد حسب توافره. للاستفسارات العاجلة، نوصي باستخدام خدمة الدردشة المباشرة مع الخبراء المتاحين.
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- الفوتر -->
     <footer class="footer">
-        <div class="container text-center">
-            <p>© 2025 منصة المزارعين. جميع الحقوق محفوظة.</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3">منصة المزارعين</h5>
+                    <p>منصة متكاملة لخدمة المزارعين وتقديم الاستشارات الزراعية من قبل خبراء متخصصين في مختلف المجالات الزراعية.</p>
+                    <div class="social-icons mt-3">
+                        <a href="#" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 class="mb-3">روابط سريعة</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-white">الرئيسية</a></li>
+                        <li class="mb-2"><a href="about-1.html" class="text-white">من نحن</a></li>
+                        <li class="mb-2"><a href="services (1).html" class="text-white">الخدمات</a></li>
+                        <li class="mb-2"><a href="expert-consultation (1).html" class="text-white">الخبراء</a></li>
+                        <li class="mb-2"><a href="" class="text-white">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="mb-3">خدماتنا</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white">استشارات زراعية</a></li>
+                        <li class="mb-2"><a href="#" class="text-white">تحليل التربة</a></li>
+                        <li class="mb-2"><a href="#" class="text-white">تشخيص الأمراض</a></li>
+                        <li class="mb-2"><a href="#" class="text-white">تخطيط المزارع</a></li>
+                        <li class="mb-2"><a href="#" class="text-white">دورات تدريبية</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <h5 class="mb-3">تواصل معنا</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> الاسكندريه جمهوريه مصر</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i>01276351643</li>
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> a9336070@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="mt-4 mb-4" style="border-color: rgba(255,255,255,0.1);">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">© 2023 منصة المزارعين. جميع الحقوق محفوظة.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0">
+                        <a href="#" class="text-white me-3">شروط الخدمة</a>
+                        <a href="#" class="text-white">سياسة الخصوصية</a>
+                    </p>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <!-- شات بوكس ذكي -->
+    <!-- شات بوكس ذكي محسن -->
     <div id="chatbox" class="chatbox-container">
-        <div class="chatbox-header">مساعد الزراعة الذكي</div>
+        <div class="chatbox-header">
+            <div class="chatbox-title">
+                <i class="fas fa-robot me-2"></i> المساعد الزراعي الذكي
+            </div>
+            <button class="chatbox-close" onclick="toggleChatbox()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
         <div id="chat-body" class="chatbox-body"></div>
         <div class="chatbox-footer">
-            <input type="text" id="user-input" placeholder="اكتب سؤالك هنا..." />
-            <button onclick="startRecognition()" id="mic">🎤</button>
-            <button onclick="sendMessage()">إرسال</button>
+            <input type="text" id="user-input" class="chat-input" placeholder="اكتب سؤالك الزراعي هنا..." />
+            <button class="chat-btn chat-btn-secondary" onclick="startVoiceRecognition()">
+                <i class="fas fa-microphone"></i>
+            </button>
+            <button class="chat-btn chat-btn-primary" onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
         </div>
     </div>
 
-    <button id="chat-toggle">💬</button>
+    <!-- زر الشات -->
+    <button class="chat-toggle-btn" onclick="toggleChatbox()">
+        <i class="fas fa-comment-dots"></i>
+    </button>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // نظام الذكاء الاصطناعي للشات بوكس
+        // نظام الذكاء الاصطناعي المحسن للشات بوكس
         class SmartChatbot {
             constructor() {
                 this.responses = {
-                    'مرحبا': 'مرحباً بك! كيف يمكنني مساعدتك في شؤون الزراعة اليوم؟ 🌱',
-                    'اهلا': 'أهلاً وسهلاً! كيف حالك؟',
-                    'سلام': 'وعليكم السلام ورحمة الله وبركاته',
-                    'شكرا': 'العفو! دائماً بخدمتك.',
+                    'مرحبا': 'مرحباً بك في منصة المزارعين الذكية! 🌱 كيف يمكنني مساعدتك اليوم في شؤون الزراعة؟',
+                    'اهلا': 'أهلاً وسهلاً بك! يسرنا تواصلك معنا. ما هو سؤالك الزراعي؟',
+                    'سلام': 'وعليكم السلام ورحمة الله وبركاته. كيف يمكنني مساعدتك اليوم؟',
+                    'شكرا': 'العفو! نحن هنا لخدمتك. هل لديك أي استفسار آخر؟',
                     'متشكر': 'الشكر لله! تفضل أي استفسار زراعي آخر؟',
                     'وقت': this.getCurrentTime,
                     'الساعة': this.getCurrentTime,
-                    'امك حلوه': 'أمك أحلى وأجمل! ❤️',
-                    'أمك جميلة': 'كل الأمهات جميلات! 🌹',
-                    'اسمك': 'أنا مساعدك الزراعي الذكي!',
-                    'مين انت': 'أنا خبير زراعي افتراضي، هنا لمساعدتك في أي استفسار عن الزراعة!',
-                    'زراعة': 'يمكنك سؤالي عن أنواع المحاصيل، مواعيد الزراعة، طرق الري، أو أي استفسار زراعي آخر',
-                    'محاصيل': 'هناك العديد من المحاصيل مثل القمح، الأرز، الذرة، الخضروات والفواكه. عن أي محصول تريد الاستفسار؟',
-                    'ري': 'أنظمة الري تشمل الري بالتنقيط، الري بالرش، والري السطحي. أي نظام تريد معرفة المزيد عنه؟'
+                    'اسمك': 'أنا المساعد الزراعي الذكي لمنصة المزارعين! 🤖🌾',
+                    'من انت': 'أنا خبير زراعي افتراضي، هنا لمساعدتك في أي استفسار عن الزراعة والمحاصيل وتربية المواشي وغيرها من المواضيع الزراعية!',
+                    'زراعة': 'يمكنني مساعدتك في مواضيع الزراعة مثل:\n- أنواع المحاصيل\n- مواعيد الزراعة\n- طرق الري\n- تسميد التربة\nعن أي موضوع تريد الاستفسار؟',
+                    'محاصيل': 'هناك العديد من المحاصيل الزراعية مثل:\n- المحاصيل الحقلية (القمح، الشعير، الذرة)\n- المحاصيل البستانية (الفواكه، الخضروات)\n- المحاصيل النقدية (القطن، البن)\nعن أي محصول تريد الاستفسار؟',
+                    'ري': 'أنظمة الري الحديثة تشمل:\n1. الري بالتنقيط (موفر للماء)\n2. الري بالرش (للمساحات الكبيرة)\n3. الري السطحي (التقليدي)\nأي نظام تريد معرفة المزيد عنه؟',
+                    'تربة': 'لتحليل التربة:\n1. خذ عينة من التربة\n2. أرسلها للمختبر\n3. احصل على التوصيات\nهل تريد معرفة المزيد عن تحسين خصوبة التربة؟',
+                    'أمراض': 'للوقاية من أمراض النبات:\n1. اختيار أصناف مقاومة\n2. الممارسات الزراعية الجيدة\n3. الرصد المبكر\nهل لاحظت أي أعراض على نباتاتك؟'
                 };
                 this.loadCustomResponses();
             }
             
             getCurrentTime() {
                 const now = new Date();
-                return `الساعة الآن هي: ${now.toLocaleTimeString('ar-EG')}`;
+                const options = { hour: '2-digit', minute: '2-digit', hour12: true };
+                return `الساعة الآن هي: ${now.toLocaleTimeString('ar-EG', options)}`;
             }
             
             saveCustomResponses() {
@@ -254,8 +750,8 @@
                 for (const [key, value] of Object.entries(this.responses)) {
                     if (![
                         'مرحبا', 'اهلا', 'سلام', 'شكرا', 'متشكر', 
-                        'وقت', 'الساعة', 'امك حلوه', 'أمك جميلة', 
-                        'اسمك', 'مين انت', 'زراعة', 'محاصيل', 'ري'
+                        'وقت', 'الساعة', 'اسمك', 'من انت', 
+                        'زراعة', 'محاصيل', 'ري', 'تربة', 'أمراض'
                     ].includes(key)) {
                         customResponses[key] = value;
                     }
@@ -276,21 +772,21 @@
             learn(question, answer) {
                 this.responses[question.toLowerCase()] = answer;
                 this.saveCustomResponses();
+                return `شكراً لك! تعلمت كيفية الرد على "${question}".`;
             }
             
             getResponse(message) {
                 const lowerMsg = message.toLowerCase();
                 
                 // معالجة أمر التعلم
-                if (lowerMsg.startsWith('تعلم-')) {
-                    const parts = message.split('-').map(p => p.trim());
+                if (lowerMsg.startsWith('تعلم')) {
+                    const parts = message.split('"').map(p => p.trim()).filter(p => p);
                     if (parts.length >= 3) {
                         const question = parts[1];
-                        const answer = parts.slice(2).join('-');
-                        this.learn(question, answer);
-                        return `تم تعليمي بنجاح! الآن عندما تقول "${question}" سأرد بـ "${answer}"`;
+                        const answer = parts[2];
+                        return this.learn(question, answer);
                     }
-                    return 'استخدم الصيغة: تعلم-السؤال-الجواب';
+                    return 'استخدم الصيغة: تعلم "السؤال" "الجواب"';
                 }
                 
                 // البحث عن رد مطابق
@@ -301,121 +797,164 @@
                 }
                 
                 // إذا لم يتعرف على الرسالة
-                return 'لم أفهم سؤالك الزراعي. يمكنك تعليمي بالصيغة: تعلم-السؤال-الجواب';
+                return 'عذراً، لم أفهم سؤالك الزراعي. يمكنك محاولة صياغته بطريقة أخرى أو تعليمي الإجابة باستخدام: تعلم "السؤال" "الجواب"';
             }
         }
 
         const chatbot = new SmartChatbot();
+        let recognition;
         
         // عرض/إخفاء الشات بوكس
-        $(document).ready(function() {
-            $('#chat-toggle').css({
-                position: 'fixed',
-                bottom: '20px',
-                right: '20px',
-                background: '#28a745',
-                border: 'none',
-                padding: '15px',
-                borderRadius: '50%',
-                color: 'white',
-                fontSize: '20px',
-                cursor: 'pointer',
-                zIndex: '1001'
-            }).click(function() {
-                $('#chatbox').toggle();
-            });
+        function toggleChatbox() {
+            const chatbox = document.getElementById('chatbox');
+            chatbox.style.display = chatbox.style.display === 'flex' ? 'none' : 'flex';
             
-            // رسالة ترحيبية
-            setTimeout(() => {
-                addBotMessage("مرحباً! أنا المساعد الزراعي الذكي. يمكنك سؤالي عن أي موضوع زراعي أو تعليمي ردود جديدة باستخدام: تعلم-السؤال-الجواب");
-            }, 800);
-        });
-
+            if (chatbox.style.display === 'flex') {
+                document.getElementById('user-input').focus();
+            }
+        }
+        
         // التعرف على الصوت
-        var recognition;
-        function startRecognition() {
+        function startVoiceRecognition() {
             if (!('webkitSpeechRecognition' in window)) {
-                addBotMessage('عذراً، ميزة التعرف على الصوت غير مدعومة في متصفحك');
+                addBotMessage('عذراً، ميزة التعرف على الصوت غير مدعومة في متصفحك. نوصي باستخدام Chrome أو Edge.');
                 return;
             }
             
             recognition = new webkitSpeechRecognition();
             recognition.lang = 'ar-SA';
             recognition.interimResults = false;
+            recognition.continuous = false;
+
+            recognition.onstart = function() {
+                addBotMessage('أنا أستمع لك الآن... يمكنك التحدث.');
+                document.getElementById('user-input').placeholder = "جارٍ الاستماع...";
+            };
 
             recognition.onresult = function(event) {
                 const transcript = event.results[0][0].transcript;
-                $('#user-input').val(transcript);
+                document.getElementById('user-input').value = transcript;
+                document.getElementById('user-input').placeholder = "اكتب سؤالك الزراعي هنا...";
                 sendMessage();
             };
 
             recognition.onerror = function(event) {
-                addBotMessage('حدث خطأ في التعرف على الصوت: ' + event.error);
+                document.getElementById('user-input').placeholder = "اكتب سؤالك الزراعي هنا...";
+                if (event.error !== 'no-speech') {
+                    addBotMessage('حدث خطأ في التعرف على الصوت: ' + event.error);
+                }
+            };
+
+            recognition.onend = function() {
+                document.getElementById('user-input').placeholder = "اكتب سؤالك الزراعي هنا...";
             };
 
             recognition.start();
-            addBotMessage('أنا أستمع لك الآن...');
         }
-
+        
         // إرسال رسالة
         function sendMessage() {
-            const userMessage = $('#user-input').val().trim();
-            if (userMessage) {
-                addUserMessage(userMessage);
-                $('#user-input').val('');
+            const userInput = document.getElementById('user-input');
+            const message = userInput.value.trim();
+            
+            if (message) {
+                addUserMessage(message);
+                userInput.value = '';
                 
                 // عرض مؤشر الكتابة
                 showTypingIndicator();
                 
+                // تأخير محاكاة للرد
                 setTimeout(() => {
                     hideTypingIndicator();
-                    const response = chatbot.getResponse(userMessage);
+                    const response = chatbot.getResponse(message);
                     addBotMessage(response);
                 }, 800 + Math.random() * 1000);
             }
         }
-
+        
         // إضافة رسالة المستخدم
         function addUserMessage(text) {
-            $('#chat-body').append(`<div class="message user">${text}</div>`);
+            const chatBody = document.getElementById('chat-body');
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message message-user';
+            messageDiv.innerHTML = `
+                ${text}
+                <div class="message-time">${timeString}</div>
+            `;
+            
+            chatBody.appendChild(messageDiv);
             scrollChatToBottom();
         }
-
+        
         // إضافة رسالة البوت
         function addBotMessage(text) {
-            $('#chat-body').append(`<div class="message bot">${text}</div>`);
+            const chatBody = document.getElementById('chat-body');
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message message-bot';
+            messageDiv.innerHTML = `
+                ${text.replace(/\n/g, '<br>')}
+                <div class="message-time">${timeString}</div>
+            `;
+            
+            chatBody.appendChild(messageDiv);
             scrollChatToBottom();
         }
-
+        
         // التمرير للأسفل
         function scrollChatToBottom() {
-            const chatBody = $('#chat-body')[0];
+            const chatBody = document.getElementById('chat-body');
             chatBody.scrollTop = chatBody.scrollHeight;
         }
-
+        
         // مؤشر الكتابة
         function showTypingIndicator() {
-            $('#chat-body').append(`
-                <div id="typing-indicator" class="message bot">
-                    <div class="typing-indicator">
-                        <span class="typing-dot"></span>
-                        <span class="typing-dot"></span>
-                        <span class="typing-dot"></span>
-                    </div>
-                </div>
-            `);
+            const chatBody = document.getElementById('chat-body');
+            
+            const typingDiv = document.createElement('div');
+            typingDiv.id = 'typing-indicator';
+            typingDiv.className = 'typing-indicator';
+            typingDiv.innerHTML = `
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+            `;
+            
+            chatBody.appendChild(typingDiv);
             scrollChatToBottom();
         }
-
+        
         function hideTypingIndicator() {
-            $('#typing-indicator').remove();
+            const typingIndicator = document.getElementById('typing-indicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
         }
-
+        
         // إرسال بالضغط على Enter
-        $('#user-input').keypress(function(e) {
-            if (e.which === 13) {
+        document.getElementById('user-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
                 sendMessage();
             }
+        });
+        
+        // رسالة ترحيبية عند التحميل
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                addBotMessage("مرحباً بك في منصة المزارعين الذكية! 🌱 أنا المساعد الزراعي الذكي. يمكنك سؤالي عن أي موضوع زراعي مثل:");
+                setTimeout(() => {
+                    addBotMessage("- مواعيد زراعة المحاصيل<br>- طرق الري الحديثة<br>- أمراض النبات وعلاجها<br>- تحليل التربة وتسميدها");
+                    setTimeout(() => {
+                        addBotMessage('يمكنك أيضاً تعليمي إجابات جديدة باستخدام: تعلم "السؤال" "الجواب"');
+                    }, 800);
+                }, 800);
+            }, 1000);
         });
     </script>
 </body>
